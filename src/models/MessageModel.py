@@ -50,7 +50,7 @@ class MessageModel(db.Model):
         return GroupModel.query.all()
 
 
-class GroupModel(Schema):
+class MessageSchema(Schema):
     id = fields.Int(dump_only=True)
     message = fields.Str(required=True)
     from_id = fields.Int(required=True)

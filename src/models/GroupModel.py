@@ -23,7 +23,7 @@ class GroupModel(db.Model):
         Class constructor
         """
         self.name = data.get('name')
-        self.number = data.get('number')')
+        self.number = data.get('number')
         self.created_at = datetime.datetime.utcnow()
         self.modified_at = datetime.datetime.utcnow()
 
@@ -62,7 +62,7 @@ class GroupModel(db.Model):
         db.session.commit()
 
 
-class GroupModel(Schema):
+class GroupSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
     number = fields.Str(required=False)
