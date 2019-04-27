@@ -25,8 +25,8 @@ class SupervisorSchema(Schema):
     password = fields.Str(required=True, load_only=True)
     department = fields.Str(required=True)
     title = fields.Str(required=True)
-    created_at = fields.DateTime(dump_only=True)
-    modified_at = fields.DateTime(dump_only=True)
+    created_on = fields.DateTime(dump_only=True)
+    modified_on = fields.DateTime(dump_only=True)
 
 
     
