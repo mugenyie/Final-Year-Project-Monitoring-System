@@ -7,6 +7,8 @@ from flask_bcrypt import Bcrypt
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
+from .BaseModel import BaseModel
+from .UserModel import UserModel
 from .GroupModel import GroupModel, GroupSchema
 from .MessageModel import MessageModel, MessageSchema
 from .ProjectLogModel import ProjectLogModel, ProjectLogSchema
