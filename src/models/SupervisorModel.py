@@ -1,11 +1,11 @@
 # src/models/SupervisorModel.py
-import datetime
+import datetime, uuid
 from marshmallow import fields, Schema
-from . import db
-from . import UserModel
+from . import db, UserModel, BaseModel
+from ..enums.UserRoleEnum import UserRoleEnum
 
 
-class SupervisorModel(UserModel):
+class SupervisorModel(UserModel, BaseModel):
 
     """ Supervisor Model """
     __tablename__ = 'supervisors'
@@ -13,18 +13,44 @@ class SupervisorModel(UserModel):
 
     # class constructor
     def __init__(self, data):
+        BaseModel.__init__(self, data)
         UserModel.__init__(self, data)
+        self.user_role_name = UserRoleEnum.SUPERVISOR.name
+        self.user_role_value = UserRoleEnum.SUPERVISOR.value
         self.department = data.get("department")
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @staticmethod
+    def get(id):
+        return SupervisorModel.query.get(id)
+
+    @staticmethod
+    def get_all():
+        return SupervisorModel.query.all()
+
+    def update(self, data):
+        for key, item in data.items():
+            setattr(self, key, item)
+        self.modified_at = datetime.datetime.utcnow()
+        db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
 class SupervisorSchema(Schema):
-    id = fields.Int(dump_only=True)
+    id = fields.Str(missing=str(uuid.uuid4))
     name = fields.Str(required=True)
     email = fields.Email(required=True)
     phonenumber = fields.Str(required=True)
     password = fields.Str(required=True, load_only=True)
     department = fields.Str(required=True)
     title = fields.Str(required=True)
+    user_role_name = fields.Str()
+    user_role_value = fields.Integer()
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)
 

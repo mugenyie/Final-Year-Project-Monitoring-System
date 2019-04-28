@@ -1,5 +1,5 @@
 # src/models/MessageModel.py
-import datetime
+import datetime, uuid
 from marshmallow import fields, Schema
 from . import db, BaseModel
 
@@ -10,8 +10,8 @@ class MessageModel(BaseModel):
     __tablename__ = 'messages'
 
     message = db.Column(db.String(128), nullable=False)
-    from_id = db.Column(db.Integer, nullable=False)
-    to_id = db.Column(db.Integer, nullable=False)
+    from_id = db.Column(db.String, nullable=False)
+    to_id = db.Column(db.String, nullable=False)
 
     # class constructor
     def __init__(self, data):
@@ -33,7 +33,7 @@ class MessageModel(BaseModel):
         return MessageModel.query.filter_by(to_id=id).order_by(MessageModel.created_at.desc())
 
 class MessageSchema(Schema):
-    id = fields.Int(dump_only=True)
+    id = fields.Str(missing=str(uuid.uuid4))
     message = fields.Str(required=True)
     from_id = fields.Int(required=True)
     to_id = fields.Int(required=True)

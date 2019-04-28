@@ -1,4 +1,4 @@
-import datetime
+import datetime, uuid
 from . import db
 
 
@@ -7,7 +7,7 @@ class BaseModel(db.Model):
     """Base Model"""
     __abstract__ = True
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True, default=str(uuid.uuid4()))
     created_on = db.Column(db.DateTime)
     modified_on = db.Column(db.DateTime)
 
@@ -15,18 +15,9 @@ class BaseModel(db.Model):
         self.created_on = datetime.datetime.utcnow()
         self.modified_on= datetime.datetime.utcnow()
 
-    #CRUD Operations
     def save(self):
         db.session.add(self)
         db.session.commit()
-    
-    @staticmethod
-    def get(id):
-        return BaseModel.query.get(id)
-
-    @staticmethod
-    def get_all():
-        return BaseModel.query.all()
 
     def update(self, data):
         for key, item in data.items():
@@ -35,5 +26,7 @@ class BaseModel(db.Model):
         db.session.commit()
     
     def delete(self):
-        db.session.delete(self)
+        db.session.delete(self.model)
         db.session.commit()
+
+

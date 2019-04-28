@@ -1,5 +1,5 @@
 # src/models/ProjectLogModel.py
-import datetime
+import datetime, uuid
 from marshmallow import fields, Schema
 from . import db, BaseModel
 
@@ -15,8 +15,8 @@ class ProjectLogModel(BaseModel):
     files = db.Column(db.String(128), nullable=True)
     score = db.Column(db.Integer, nullable=False, default=0)
     source_link = db.Column(db.String(128), nullable=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+    student_id = db.Column(db.String, db.ForeignKey('students.id'), nullable=False)
+    project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=False)
 
     # class constructor
     def __init__(self, data):
@@ -42,7 +42,7 @@ class ProjectLogModel(BaseModel):
 
 
 class ProjectLogSchema(Schema):
-    id = fields.Int(dump_only=True)
+    id = fields.Str(missing=str(uuid.uuid4))
     title = fields.Str(required=True)
     description = fields.Str(required=True)
     files = fields.Str(required=False)

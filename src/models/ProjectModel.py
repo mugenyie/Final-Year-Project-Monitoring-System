@@ -1,5 +1,5 @@
 # src/models/ProjectModel.py
-import datetime
+import datetime, uuid
 from marshmallow import fields, Schema
 from . import db, BaseModel
 
@@ -13,9 +13,9 @@ class ProjectModel(BaseModel):
     git_url = db.Column(db.String(128), nullable=True)
     web_url = db.Column(db.String(128), nullable=True)
     score = db.Column(db.Integer, nullable=False, default=0)
-    proposal_file = db.Column(db.Integer, nullable=True)
-    documentation_file = db.Column(db.Integer, nullable=True)
-    supervisor_id = db.Column(db.Integer, db.ForeignKey('supervisors.id'), nullable=True)
+    proposal_file = db.Column(db.String(128), nullable=True)
+    documentation_file = db.Column(db.String(128), nullable=True)
+    supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
     # class constructor
     def __init__(self, data):
@@ -37,7 +37,7 @@ class ProjectModel(BaseModel):
 
 
 class ProjectSchema(Schema):
-    id = fields.Int(dump_only=True)
+    id = fields.Str(missing=str(uuid.uuid4))
     name = fields.Str(required=True)
     git_url = fields.Str(required=False)
     web_url = fields.Str(required=False)
