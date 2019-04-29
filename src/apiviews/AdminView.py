@@ -90,8 +90,7 @@ def get_me():
   user_data = admin_schema.dump(user).data
   return custom_response(user_data, 200)
 
-
-@student_api.route('/login', methods=['POST'])
+@admin_api.route('/login', methods=['POST'])
 def login():
   """
   Admin Login Api
