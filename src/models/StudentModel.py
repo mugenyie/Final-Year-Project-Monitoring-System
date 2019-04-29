@@ -10,7 +10,7 @@ class StudentModel(UserModel, BaseModel):
     
     """ Student Model """
     __tablename__ = 'students'
-    student_number = db.Column(db.String(128), nullable=False)
+    student_number = db.Column(db.String(128), unique=True, nullable=False)
     course = db.Column(db.String(128), nullable=False)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
     group_id = db.Column(db.String, db.ForeignKey('groups.id'), nullable=True)
