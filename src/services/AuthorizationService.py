@@ -71,8 +71,9 @@ class Auth:
 
       check_student = StudentModel.get(user_id)
       check_supervisor = SupervisorModel.get(user_id)
+      check_admin = AdminModel.get(user_id)
       
-      if not (check_student or check_supervisor):
+      if not (check_student or check_supervisor or check_admin):
         return custom_response({'error': 'user does not exist, invalid token'}, 400)
       g.user = {'id': user_id, 'user_role': user_role}
       return func(*args, **kwargs)

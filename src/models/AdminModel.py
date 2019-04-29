@@ -16,6 +16,32 @@ class AdminModel(UserModel, BaseModel):
         self.user_role_name = UserRoleEnum.ADMIN.name
         self.user_role_value = UserRoleEnum.ADMIN.value
 
+    @staticmethod
+    def get_all():
+        return AdminModel.query.all()
+    
+    @staticmethod
+    def get(id):
+        return AdminModel.query.get(id)
+
+    @staticmethod
+    def get_by_email(value):
+        return AdminModel.query.filter_by(email=value).first()
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    def update(self, data):
+        for key, item in data.items():
+            setattr(self, key, item)
+        self.modified_at = datetime.datetime.utcnow()
+        db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
 class AdminSchema(Schema):
     id = fields.Str(missing=str(uuid.uuid4))
     name = fields.Str(required=True)

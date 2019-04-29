@@ -6,6 +6,7 @@ from .config import app_config
 from .models import db, bcrypt
 from .apiviews.SupervisorView import supervisor_api
 from .apiviews.StudentView import student_api
+from .apiviews.AdminView import admin_api
 
 def create_app(env_name):
   """
@@ -24,6 +25,7 @@ def create_app(env_name):
   api_version = "/api/v1/"
   app.register_blueprint(supervisor_api, url_prefix='{}supervisors'.format(api_version))
   app.register_blueprint(student_api, url_prefix='{}students'.format(api_version))
+  app.register_blueprint(admin_api, url_prefix='{}admin'.format(api_version))
 
   @app.route('/', methods=['GET'])
   def index():
