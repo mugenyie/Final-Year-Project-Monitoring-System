@@ -73,6 +73,7 @@ class StudentSchema(Schema):
     course = fields.Function(lambda obj: obj.course.upper(), required=True)
     created_at = fields.DateTime(dump_only=True)
     user_role_value = fields.Int()
+    user_role_name = fields.Str()
     modified_at = fields.DateTime(dump_only=True)
     supervisor_id = fields.Int(required=False)
     group_id = fields.Int(required=False)
