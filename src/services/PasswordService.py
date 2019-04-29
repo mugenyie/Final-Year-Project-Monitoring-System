@@ -1,9 +1,9 @@
-class GeneratePassword:
-    def __init__(self, length):
-        self.length = length
+import random, string
 
-    def generate_pin(self):
-        return ""
+class GeneratePassword:
+    """Generate random password or pin"""
+    def generate_pin(self, length=6):
+        return "".join(random.choice(string.digits) for i in range(length))
         
-    def generate_password(self):
-        return ""
+    def generate_password(self, length=6):
+        return "".join(random.choice(string.ascii_letters) for i in range(length))
