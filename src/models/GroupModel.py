@@ -11,7 +11,8 @@ class GroupModel(BaseModel):
     __tablename__ = 'groups'
 
     name = db.Column(db.String(128), nullable=False)
-    number = db.Column(db.String(128),unique=True, nullable=False)
+    number = db.Column(db.String(128),unique=True, nullable=True)
+    password = db.Column(db.String(128), nullable=False)
     project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
@@ -35,7 +36,8 @@ class GroupModel(BaseModel):
 
 class GroupSchema(Schema):
     id = fields.Str(missing=str(uuid.uuid4))
-    name = fields.Str(required=True)
+    name = fields.Str(required=False)
+    password = fields.Str(required=False)
     number = fields.Str(required=False)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)
