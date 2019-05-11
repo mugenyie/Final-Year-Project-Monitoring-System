@@ -33,7 +33,8 @@ class Auth:
         'HS256'
       ).decode("utf-8")
     except Exception as e:
-      return custom_response({'error': 'error in generating user token'}, 400)
+      return str(e)
+      # return custom_response({'error': 'error in generating user token'}, 400)
 
   @staticmethod
   def decode_token(token):
