@@ -1,6 +1,6 @@
 #/src/views/AdminView
 
-from flask import request, json, Response, Blueprint, g, jsonify
+from flask import request, json, Response, Blueprint, g
 from ..models.AdminModel import AdminModel, AdminSchema
 from ..services.AuthorizationService import Auth
 from ..apiviews import custom_response
@@ -109,4 +109,4 @@ def login():
     return custom_response({'error': 'invalid credentials'}, 400)
   user_data = admin_schema.dump(user).data
   token = Auth.generate_token(user_data.get('id'), user_data.get('user_role_value'))
-  return jsonify(api_toke=token, data=user_data),200 
+  return custom_response({'api-token': 'token', 'data':'user_data'}, 200)
