@@ -1,7 +1,7 @@
 # Student Project Monitoring System
 
 ## Admin API
-```
+```json
 POST: http://127.0.0.1:5000/api/v1/admin/
 Body
 {
@@ -59,7 +59,7 @@ Response
 
 
 ## Student API
-```
+```json
 POST: http://127.0.0.1:5000/api/v1/student/
 Body
 {
@@ -115,7 +115,7 @@ GET: http://127.0.0.1:5000/api/v1/student/me
 ```
 
 ## Supervisor API
-```
+```json
 POST: http://127.0.0.1:5000/api/v1/supervisor/
 Body
 {
@@ -162,3 +162,6 @@ Response:
 }
 GET: http://127.0.0.1:5000/api/v1/supervisor/me
 ```
+
+## API BaseUrl
+[API](https://csc-fypms.herokuapp.com/)
