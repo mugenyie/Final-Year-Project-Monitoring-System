@@ -1,7 +1,7 @@
-Student Project Monitoring System
+# Student Project Monitoring System
 
-# Admin API
-
+## Admin API
+```
 POST: http://127.0.0.1:5000/api/v1/admin/
 Body
 {
@@ -22,7 +22,6 @@ Reponse
     },
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTc2ODk4NTcsImlhdCI6MTU1NzYwMzQ1NywidXNlcl9pZCI6ImNhZjcwMzcwLWIwZDUtNDc3NC04ZGFkLTFmOWYyMmI4MzVjMCIsInVzZXJfcm9sZSI6MX0.mqOcaor4hzrYmwDVzbuuEKUdxbALOtdJHoVE6h3-CJc"
 }
-
 
 GET: http://127.0.0.1:5000/api/v1/admin/<string:user_id>
 headers - api-token
@@ -56,8 +55,11 @@ Response
         "user_role_value": 1
     }
 }
+```
 
-# Student API
+
+## Student API
+```
 POST: http://127.0.0.1:5000/api/v1/student/
 Body
 {
@@ -110,8 +112,10 @@ Reponse
 ]
 GET: http://127.0.0.1:5000/api/v1/student/<string:user_id>
 GET: http://127.0.0.1:5000/api/v1/student/me
+```
 
-# Supervisor API
+## Supervisor API
+```
 POST: http://127.0.0.1:5000/api/v1/supervisor/
 Body
 {
@@ -157,3 +161,4 @@ Response:
     }
 }
 GET: http://127.0.0.1:5000/api/v1/supervisor/me
+```
