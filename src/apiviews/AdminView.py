@@ -30,7 +30,7 @@ def create():
   user.save()
   user_data = admin_schema.dump(user).data
   token = Auth.generate_token(user_data.get('id'), user_data.get('user_role_value'))
-  return custom_response(user_data, 201)
+  return custom_response({'token': token, 'data': user_data}, 201)
 
 @admin_api.route('/', methods=['GET'])
 @Auth.auth_required
@@ -109,4 +109,4 @@ def login():
     return custom_response({'error': 'invalid credentials'}, 400)
   user_data = admin_schema.dump(user).data
   token = Auth.generate_token(user_data.get('id'), user_data.get('user_role_value'))
-  return custom_response({'api-token': token, 'data':user_data}, 200)
+  return custom_response(user_data, 200)
