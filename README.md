@@ -1,5 +1,7 @@
 # Student Project Monitoring System
 
+[![Build Status](https://travis-ci.com/mugenyie/fyp.svg?branch=develop)](https://travis-ci.com/mugenyie/fyp)
+
 ## Admin API
 ```json
 POST: http://127.0.0.1:5000/api/v1/admin/
