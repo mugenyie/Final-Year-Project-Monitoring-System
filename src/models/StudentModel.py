@@ -32,6 +32,10 @@ class StudentModel(UserModel, BaseModel):
         self.project_id = data.get('project_id')
 
     #CRUD Operations
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
     @staticmethod
     def get(id):
         return StudentModel.query.get(id)

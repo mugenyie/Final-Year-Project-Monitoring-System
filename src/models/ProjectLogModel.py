@@ -32,6 +32,9 @@ class ProjectLogModel(BaseModel):
         return "<id: {}>".format(self.id)
 
     #CRUD Operations
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
     @staticmethod
     def get_by_student(student_id):
         return ProjectLogModel.query.filter_by(student_id=student_id).order_by(ProjectLogModel.created_at.desc()).first()
