@@ -109,4 +109,4 @@ def login():
     return custom_response({'error': 'invalid credentials'}, 400)
   user_data = admin_schema.dump(user).data
   token = Auth.generate_token(user_data.get('id'), user_data.get('user_role_value'))
-  return custom_response({'api-token': token, 'data':'user_data'}, 200)
+  return custom_response({'api-token': 'token', 'data': user_data}, 200)
