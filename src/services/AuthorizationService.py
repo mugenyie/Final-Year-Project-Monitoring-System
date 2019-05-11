@@ -2,7 +2,7 @@
 import jwt
 import os
 import datetime
-from flask import json, Response, request, g
+from flask import json, Response, request, g, jsonify
 from functools import wraps
 from ..models.UserModel import UserModel
 from ..models.StudentModel import StudentModel
@@ -33,7 +33,7 @@ class Auth:
         'HS256'
       ).decode("utf-8")
     except Exception as e:
-      return custom_response({'error': 'error in generating user token'}, 400)
+      return jsonify({'error': 'error in generating user token '+str(e)}),400 
 
   @staticmethod
   def decode_token(token):
@@ -75,7 +75,7 @@ class Auth:
       check_admin = AdminModel.get(user_id)
       
       if not (check_student or check_supervisor or check_admin):
-        return custom_response({'error': 'user does not exist, invalid token'}, 400)
+        return jsonify({'error': 'User does not exist'}),400 
       g.user = {'id': user_id, 'user_role': user_role}
       return func(*args, **kwargs)
     return decorated_auth
