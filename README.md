@@ -1,4 +1,4 @@
-# Student Project Monitoring System
+# Final Year Project Monitoring System
 
 [![Build Status](https://travis-ci.com/mugenyie/fyp.svg?branch=develop)](https://travis-ci.com/mugenyie/fyp)
 
