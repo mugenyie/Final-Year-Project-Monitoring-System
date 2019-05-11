@@ -7,6 +7,7 @@ from functools import wraps
 from ..models.UserModel import UserModel
 from ..models.StudentModel import StudentModel
 from ..models.SupervisorModel import SupervisorModel
+from ..models.AdminModel import AdminModel
 from ..apiviews import custom_response
 from ..enums.UserRoleEnum import UserRoleEnum
 

@@ -23,8 +23,8 @@ def create_app(env_name):
   db.init_app(app)
 
   api_version = "/api/v1/"
-  app.register_blueprint(supervisor_api, url_prefix='{}supervisors'.format(api_version))
-  app.register_blueprint(student_api, url_prefix='{}students'.format(api_version))
+  app.register_blueprint(supervisor_api, url_prefix='{}supervisor'.format(api_version))
+  app.register_blueprint(student_api, url_prefix='{}student'.format(api_version))
   app.register_blueprint(admin_api, url_prefix='{}admin'.format(api_version))
 
   @app.route('/', methods=['GET'])

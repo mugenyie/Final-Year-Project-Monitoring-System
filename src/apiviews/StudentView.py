@@ -41,7 +41,7 @@ def get_all():
   students = StudentModel.get_all()
   return custom_response(students_schema.dump(students).data, 200)
 
-@student_api.route('/<int:user_id>', methods=['GET'])
+@student_api.route('/<string:user_id>', methods=['GET'])
 @Auth.auth_required
 def get_a_user(user_id):
   """

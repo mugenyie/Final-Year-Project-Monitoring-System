@@ -31,6 +31,10 @@ class SupervisorModel(UserModel, BaseModel):
     def get_all():
         return SupervisorModel.query.all()
 
+    @staticmethod
+    def get_by_email(value):
+        return SupervisorModel.query.filter_by(email=value).first()
+
     def update(self, data):
         for key, item in data.items():
             setattr(self, key, item)

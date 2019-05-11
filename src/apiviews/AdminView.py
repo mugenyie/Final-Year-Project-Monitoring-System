@@ -38,10 +38,10 @@ def get_all():
   """
   Get all admins
   """
-  users = AdminModel.get_all()
-  return custom_response(admin_schema.dump(users).data, 200)
+  admins = AdminModel.get_all()
+  return custom_response(admin_schema.dump(admins).data, 200)
 
-@admin_api.route('/<int:user_id>', methods=['GET'])
+@admin_api.route('/<string:user_id>', methods=['GET'])
 @Auth.auth_required
 def get_a_user(user_id):
   """
@@ -97,7 +97,7 @@ def login():
   """
   req_data = request.get_json()
 
-  data, error = admin_api.load(req_data, partial=True)
+  data, error = admin_schema.load(req_data, partial=True)
   if error:
     return custom_response(error, 400)
   if not data.get('email') or not data.get('password'):
