@@ -27,11 +27,12 @@ class Auth:
         'user_id': user_id,
         'user_role': user_role
       }
-      return jwt.encode(
+      token = jwt.encode(
         payload,
         os.getenv('JWT_SECRET_KEY'),
         'HS256'
       ).decode("utf-8")
+      return str(token)
     except Exception as e:
       return str(e)
       # return custom_response({'error': 'error in generating user token'}, 400)
