@@ -24,7 +24,7 @@ class Auth:
       payload = {
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
         'iat': datetime.datetime.utcnow(),
-        'user_id': user_id
+        'user_id': user_id,
         'user_role': user_role
       }
       return jwt.encode(
