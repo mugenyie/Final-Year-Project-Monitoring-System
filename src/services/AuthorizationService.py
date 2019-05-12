@@ -43,7 +43,7 @@ class Auth:
     """
     re = {'data': {}, 'error': {}}
     try:
-      payload = jwt.decode(token, os.getenv('JWT_SECRET_KEY'))
+      payload = jwt.decode(token, 'klknlkklnl')
       re['data'] = {'user_id': payload['user_id'], 'user_role': payload['user_role']}
       return re
     except jwt.ExpiredSignatureError as e1:
