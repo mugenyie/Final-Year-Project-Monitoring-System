@@ -24,14 +24,14 @@ class Auth:
       payload = {
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
         'iat': datetime.datetime.utcnow(),
-        'user_id': user_id,
-        'user_role': user_role
+        'user_id': user_id
+        # 'user_role': user_role
       }
       return jwt.encode(
         payload,
         os.getenv('JWT_SECRET_KEY'),
         algorithm='HS256'
-      ).decode("utf-8")
+      ).decode("UTF-8")
     except Exception as e:
       return str(e)
       # return custom_response({'error': 'error in generating user token'}, 400)
