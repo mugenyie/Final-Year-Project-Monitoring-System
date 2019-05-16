@@ -10,11 +10,13 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="css/style.css" media="all" />
 <script src="operations_js/check_loggedin.js"></script>
+<script src="operations_js/group.js"></script>
+<script src="operations_js/members.js"></script>
 <!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();getStudentDetails();">
+<body onload="checkToken();GetUserGroup();GetGroupMembers();">
 <div class="testing">
 <header class="main">
 <h1><strong>Final Year Project</strong> Management System</h1>
@@ -52,10 +54,47 @@
 <!-- navigation -->
 
 <section class="content">
-    <h1 class="Pageheader">Student Details</h1>
-    <div id="userDetails"></div>
-</section>
+        <section class="widget" style="height: 400px; min-height:300px">
+                <header>
+                <span class="icon">📄</span>
+                <hgroup>
+                    <h2>--</h2>
+                <h1>Members</h1>
+                </hgroup>
 
+                </header>
+                <div class="content">
+                <form id="create_group" onsubmit="AddStudent()">
+                        <div class="field-wrap">
+                            Group name: <input readonly id="r-group_name" type="text">
+                        </div>
+                        <div class="field-wrap">
+                        Group Number: <input readonly id="r-group_number" type="text">
+                        </div>
+                        <h1 class="Pageheader">Members</h1>
+                        <table>
+                            <th></th><th>Name</th><th>Email</th><th>Phone</th><th>Student Number</th><th>Password</th>
+                            <div id="member-list"></div>
+                            <br /><br /><br />
+                            <tr>
+                                <td>New Member: &nbsp;</td>
+                                <td><input id="r-name" required type="text"></td>
+                                <td><input id="r-email" required type="email"></td>
+                                <td><input id="r-phonenumber" required type="tel"></td>
+                                <td><input id="r-student_number" required type="text"></td>
+                                <td><input id="r-password" required type="password"></td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="">Add Member</button>
+                </form>
+                </div>
+            </section>
+</section>
+<script>
+
+document.getElementById('r-group_name').value = getCookie('group_name');
+document.getElementById('r-group_number').value = getCookie('group_name');
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="js/jquery.wysiwyg.js"></script>
 <script src="js/custom.js"></script>
