@@ -30,7 +30,7 @@ def create():
   student.save()
   student_data = student_schema.dump(student).data
   token = Auth.generate_token(student_data.get('id'), student_data.get('user_role_value'))
-  return custom_response({'token': token}, 201)
+  return custom_response({'api_token': token}, 201)
 
 @student_api.route('/', methods=['GET'])
 @Auth.auth_required
@@ -110,4 +110,4 @@ def login():
     return custom_response({'error': 'invalid credentials'}, 400)
   ser_data = student_schema.dump(user).data
   token = Auth.generate_token(ser_data.get('id'), ser_data.get('user_role_value'))
-  return custom_response({'api-token': token, 'user':ser_data}, 200)
+  return custom_response({'api_token': token, 'user':ser_data}, 200)
