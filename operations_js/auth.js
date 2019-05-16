@@ -43,11 +43,12 @@ function registerStudentCookies(data){
     setCookie('email', data.user.email, 30);
     setCookie('name', data.user.name, 30);
     setCookie('course', data.user.course, 30);
-    setCookie('goup_id', data.user.group_id, 30);
+    setCookie('group_id', data.user.group_id, 30);
     setCookie('student_number', data.user.student_number, 30);
     setCookie('phonenumber', data.user.phonenumber, 30);
     setCookie('user_role_name', data.user.user_role_name, 30);
     setCookie('user_role_value', data.user.user_role_value, 30);
+
     console.log("Cookie data => "+document.cookie);
 }
 
