@@ -2,7 +2,7 @@
 import datetime, uuid
 from marshmallow import fields, Schema
 from . import db, BaseModel
-from .StudentModel import StudentSchema
+from .StudentModel import StudentSchema, StudentModel
 
 
 class GroupModel(BaseModel):
@@ -12,7 +12,6 @@ class GroupModel(BaseModel):
 
     name = db.Column(db.String(128), nullable=False)
     number = db.Column(db.String(128),unique=True, nullable=True)
-    password = db.Column(db.String(128), nullable=False)
     project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
@@ -26,23 +25,30 @@ class GroupModel(BaseModel):
         return "<id: {}>".format(self.id)
 
     #CRUD Operations
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    @staticmethod
+    def view_members(group_id):
+        return StudentModel.view_group_members(group_id)
+
     @staticmethod
     def get_by_supervisor(supervisor_id):
         return GroupModel.query.filter_by(supervisor_id=supervisor_id).order_by(GroupModel.created_at.desc())
 
     @staticmethod
-    def get_by_group_number(number):
-        return GroupModel.query.filter_by(number=number).first()    
+    def get_by_id(group_id):
+        return GroupModel.query.get(group_id)  
 
 class GroupSchema(Schema):
     id = fields.Str(missing=str(uuid.uuid4))
-    name = fields.Str(required=False)
-    password = fields.Str(required=False)
-    number = fields.Str(required=False)
+    name = fields.Str(required=True)
+    number = fields.Str(required=True)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)
-    project_id = fields.Int(dump_only=True)
-    supervisor_id = fields.Int(dump_only=True)
+    project_id = fields.Str()
+    supervisor_id = fields.Str()
     members = fields.Nested(StudentSchema, many=True)
 
 

@@ -49,6 +49,10 @@ class StudentModel(UserModel, BaseModel):
         return StudentModel.query.filter_by(email=value).first()
 
     @staticmethod
+    def view_group_members(group_id): 
+        return StudentModel.query.filter_by(group_id=group_id) 
+
+    @staticmethod
     def get_by_supervisor(supervisor_id):
         return StudentModel.query.filter_by(supervisor_id=supervisor_id)
 
