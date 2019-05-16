@@ -165,5 +165,30 @@ Response:
 GET: http://127.0.0.1:5000/api/v1/supervisor/me
 ```
 
+## Group API
+```
+POST: https://csc-fypms.herokuapp.com/api/v1/group/
+Body
+{  
+	"name":"Test",
+	"number":"Test1",
+	"created_by":"me"
+}
+Reponse
+{
+    "created_by": "me",
+    "created_on": "2019-05-16T13:08:29.058417+00:00",
+    "id": "c2a55119-e4ba-4804-8986-42749a8812b7",
+    "modified_on": "2019-05-16T13:08:29.058459+00:00",
+    "name": "Test",
+    "number": "Test1",
+    "project_id": null,
+    "supervisor_id": null
+}
+GET: https://csc-fypms.herokuapp.com/api/v1/group/<str:group_id>
+GET: https://csc-fypms.herokuapp.com/api/v1/group/<str:group_id>/members
+
+```
+
 ## API BaseUrl
 [API](https://csc-fypms.herokuapp.com/)
