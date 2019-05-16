@@ -115,6 +115,7 @@ Reponse
 GET: http://127.0.0.1:5000/api/v1/student/<string:user_id>
 GET: http://127.0.0.1:5000/api/v1/student/me
 PUT: http://127.0.0.1:5000/api/v1/student/me
+GET: http://127.0.0.1:5000/api/v1/student/group/<string:group_id>/members
 ```
 
 ## Supervisor API

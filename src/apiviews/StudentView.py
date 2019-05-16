@@ -41,6 +41,12 @@ def get_all():
   students = StudentModel.get_all()
   return custom_response(students_schema.dump(students).data, 200)
 
+@student_api.route('/group/<string:group_id>/members', methods=['GET'])
+@Auth.auth_required
+def get_group_members(group_id):
+  students = StudentModel.view_group_members(group_id)
+  return custom_response(students_schema.dump(students).data, 200)
+
 @student_api.route('/<string:user_id>', methods=['GET'])
 @Auth.auth_required
 def get_a_user(user_id):
