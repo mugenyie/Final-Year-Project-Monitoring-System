@@ -30,7 +30,7 @@ def create():
   student.save()
   student_data = student_schema.dump(student).data
   token = Auth.generate_token(student_data.get('id'), student_data.get('user_role_value'))
-  return custom_response({'api_token': token}, 201)
+  return custom_response({'api_token': token, 'user':student_data}, 201)
 
 @student_api.route('/', methods=['GET'])
 @Auth.auth_required
