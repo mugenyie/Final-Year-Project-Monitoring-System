@@ -16,9 +16,13 @@ def create():
   """
   req_data = request.get_json()
   data, error = group_schema.load(req_data)
-
   if error:
     return custom_response(error, 400)
+
+  existing_group = GroupModel.get_by_group_number(data.get('number'))
+  if existing_group:
+    message = {'error': 'Group with number "{}" already exists'.format(data.get('number'))}
+    return custom_response(message, 400)
   
   group = GroupModel(data)
   group.save()

@@ -1,4 +1,5 @@
 # src/models/GroupModel.py
+from flask import g
 import datetime, uuid
 from marshmallow import fields, Schema
 from . import db, BaseModel
@@ -12,6 +13,7 @@ class GroupModel(BaseModel):
 
     name = db.Column(db.String(128), nullable=False)
     number = db.Column(db.String(128),unique=True, nullable=True)
+    created_by = db.Column(db.String(128),unique=True, nullable=True)
     project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
@@ -20,6 +22,7 @@ class GroupModel(BaseModel):
         BaseModel.__init__(self, data)
         self.name = data.get('name')
         self.number = data.get('number')
+        self.created_by = data.get('created_by')
 
     def __str__(self):
         return "<id: {}>".format(self.id)
@@ -32,6 +35,10 @@ class GroupModel(BaseModel):
     @staticmethod
     def view_members(group_id):
         return StudentModel.view_group_members(group_id)
+
+    @staticmethod
+    def get_by_group_number(value):
+        return GroupModel.query.filter_by(number=value).first()
 
     @staticmethod
     def get_by_supervisor(supervisor_id):
@@ -47,6 +54,7 @@ class GroupSchema(Schema):
     number = fields.Str(required=True)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)
+    created_by = fields.Str(required=True)
     project_id = fields.Str()
     supervisor_id = fields.Str()
     members = fields.Nested(StudentSchema, many=True)
