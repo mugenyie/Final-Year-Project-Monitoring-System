@@ -114,6 +114,7 @@ Reponse
 ]
 GET: http://127.0.0.1:5000/api/v1/student/<string:user_id>
 GET: http://127.0.0.1:5000/api/v1/student/me
+PUT: http://127.0.0.1:5000/api/v1/student/me
 ```
 
 ## Supervisor API
@@ -166,7 +167,7 @@ GET: http://127.0.0.1:5000/api/v1/supervisor/me
 ```
 
 ## Group API
-```
+```json
 POST: https://csc-fypms.herokuapp.com/api/v1/group/
 Body
 {  

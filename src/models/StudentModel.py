@@ -84,7 +84,7 @@ class StudentSchema(Schema):
     user_role_name = fields.Str()
     modified_at = fields.DateTime(dump_only=True)
     supervisor_id = fields.Int(required=False)
-    group_id = fields.Int(required=False)
+    group_id = fields.Str(required=False)
     project_id = fields.Int(required=False)
     # class Meta:
     #     fields = ("name","student_number","email","password","course")
