@@ -16,7 +16,7 @@ def create():
   """
   Create new group
   """
-  req_data = request.get_json(Force=True)
+  req_data = request.get_json(force=True)
   data, error = group_schema.load(req_data)
   if error:
     return custom_response(error, 400)
