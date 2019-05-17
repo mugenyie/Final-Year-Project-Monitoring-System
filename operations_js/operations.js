@@ -7,6 +7,9 @@ console.log(auth_token);
 async function PostData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -20,6 +23,9 @@ async function PostData(url = '', data = {}) {
 async function GetData(url = '') {
     // Default options are marked with *
       const response = await fetch(url, {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         method: 'GET',
         headers: {
             'api-token': auth_token
@@ -31,6 +37,9 @@ async function GetData(url = '') {
 async function UpdateData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
