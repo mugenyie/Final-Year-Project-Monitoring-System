@@ -74,7 +74,7 @@ def update():
     student = StudentModel.get(g.user.get('id'))
     student.update(data)
     student_data = student_schema.dump(student).data
-    return custom_response(student_data, 200)
+    return custom_response(student_data, 202)
 
 @student_api.route('/me', methods=['DELETE'])
 @Auth.auth_required

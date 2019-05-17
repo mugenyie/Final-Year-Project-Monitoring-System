@@ -86,9 +86,6 @@ class StudentSchema(Schema):
     supervisor_id = fields.Int(required=False)
     group_id = fields.Str(required=False)
     project_id = fields.Int(required=False)
-    # class Meta:
-    #     fields = ("name","student_number","email","password","course")
-    #     ordered = True
 
 
     

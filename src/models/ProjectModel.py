@@ -16,6 +16,7 @@ class ProjectModel(BaseModel):
     proposal_file = db.Column(db.String(128), nullable=True)
     documentation_file = db.Column(db.String(128), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
+    created_by = db.Column(db.String(128), nullable=False)
 
     # class constructor
     def __init__(self, data):
@@ -30,10 +31,31 @@ class ProjectModel(BaseModel):
     def __str__(self):
         return "<id: {}>".format(self.id)
 
-    #CRUD Operations
+    def save():
+        db.session.add(self)
+        db.session.commit()
+
+    def update():
+        for key, item in data.items():
+            setattr(self, key, item)
+        self.modified_at = datetime.datetime.utcnow()
+        db.session.commit()
+
+    @staticmethod
+    def get_project(project_id):
+        return ProjectModel.query.get(project_id)
+
+    @staticmethod
+    def view_all_projects():
+        return ProjectModel.query.all()
+
     @staticmethod
     def get_by_supervisor(supervisor_id):
-        return ProjectModel.query.filter_by(id=supervisor_id).order_by(ProjectModel.created_at.desc())
+        return ProjectModel.query.filter_by(supervisor_id=supervisor_id).order_by(ProjectModel.created_at.desc())
+    
+    @staticmethod
+    def get_by_createdby(student_id):
+        return ProjectModel.query.filter_by(created_by=student_id).order_by(ProjectModel.created_at.desc())
 
 
 class ProjectSchema(Schema):
@@ -44,6 +66,7 @@ class ProjectSchema(Schema):
     score = fields.Int(required=False)
     proposal_file = fields.Str(required=False)
     documentation_file = fields.Str(required=False)
+    created_by = fields.Str(required=True)
     supervisor_id = fields.Int(required=False)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)

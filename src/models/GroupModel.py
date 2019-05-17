@@ -13,7 +13,7 @@ class GroupModel(BaseModel):
 
     name = db.Column(db.String(128), nullable=False)
     number = db.Column(db.String(128),unique=True, nullable=True)
-    created_by = db.Column(db.String(128),unique=True, nullable=True)
+    created_by = db.Column(db.String(128), nullable=True)
     project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
