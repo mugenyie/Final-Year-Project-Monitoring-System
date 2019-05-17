@@ -1,6 +1,6 @@
 let created_by = getCookie('id');
 let auth_token = getCookie('auth_token') == null?"":getCookie('auth_token');
-let baseurl = "http://127.0.0.1:5000/api/v1/";
+let baseurl = "https://csc-fypms.herokuapp.com/api/v1/";
 console.log(created_by);
 console.log(auth_token);
 
