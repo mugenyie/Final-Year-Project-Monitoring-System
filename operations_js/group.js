@@ -35,7 +35,7 @@ function createNewGroup(id,name, number){
     .catch(error => console.error(error));  
 }
 
-function updateStudent(){
+function updateStudent(id){
     UpdateData(baseurl+'student/me', {
         group_id:id
     })
