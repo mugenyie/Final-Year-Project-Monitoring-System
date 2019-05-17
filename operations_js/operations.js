@@ -9,7 +9,7 @@ async function PostData(url = '', data = {}) {
       const response = await fetch(url, {
         mode: 'cors',
         cache: 'no-cache',
-        credentials: 'same-origin',
+        credentials: 'omit',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ async function GetData(url = '') {
       const response = await fetch(url, {
         mode: 'cors',
         cache: 'no-cache',
-        credentials: 'same-origin',
+        credentials: 'omit',
         method: 'GET',
         headers: {
             'api-token': auth_token
@@ -39,7 +39,7 @@ async function UpdateData(url = '', data = {}) {
       const response = await fetch(url, {
         mode: 'cors',
         cache: 'no-cache',
-        credentials: 'same-origin',
+        credentials: 'omit',
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
