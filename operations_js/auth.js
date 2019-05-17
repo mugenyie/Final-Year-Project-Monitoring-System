@@ -52,6 +52,7 @@ function LoginStudent(email, password){
 function SignUpStudent(){
     event.preventDefault();
     console.log("signup student");
+    let id = create_UUID();
     let course = document.getElementById('r-course').value;
     let email = document.getElementById('r-email').value;
     let name = document.getElementById('r-name').value;
@@ -60,6 +61,7 @@ function SignUpStudent(){
     let student_number = document.getElementById('r-student_number').value;
     
     PostData(baseurl+'student/', {
+        id:id,
         course:course,
         email:email, 
         name:name,
