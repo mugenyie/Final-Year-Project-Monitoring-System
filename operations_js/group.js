@@ -12,10 +12,11 @@ function GetUserGroup(){
     .catch(error => console.error(error));  
 }
 
-function CreateGroup(){
+async function CreateGroup(){
     event.preventDefault()
     let id = create_UUID();
-    createNewGroup(id,document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
+    await createNewGroup(id,document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
+    setTimeout()
     //Update my group id
     updateStudent(id);
 }
