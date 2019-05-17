@@ -1,6 +1,7 @@
 #/src/views/GroupView
 
 from flask import request, json, Response, Blueprint, g
+from flask_cors import CORS, cross_origin
 from ..models.GroupModel import GroupModel, GroupSchema
 from ..models.StudentModel import StudentModel, StudentSchema
 from ..services.AuthorizationService import Auth
@@ -10,6 +11,7 @@ group_api = Blueprint('group_api', __name__)
 group_schema = GroupSchema()
 
 @group_api.route('/', methods=['POST'])
+@cross_origin()
 def create():
   """
   Create new group
