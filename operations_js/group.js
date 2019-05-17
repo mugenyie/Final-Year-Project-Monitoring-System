@@ -12,17 +12,18 @@ function GetUserGroup(){
     .catch(error => console.error(error));  
 }
 
-async function CreateGroup(){
+function CreateGroup(){
     event.preventDefault()
-
-    await createNewGroup(document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
+    let id = create_UUID();
+    createNewGroup(id,document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
     //Update my group id
-    updateStudent();
+    updateStudent(id);
 }
 
-function createNewGroup(name, number){
+function createNewGroup(id,name, number){
     console.log("Create group");
     PostData(baseurl+'group/', {
+        id:id,
         name:name,
         number:number,
         created_by:created_by
@@ -36,7 +37,7 @@ function createNewGroup(name, number){
 
 function updateStudent(){
     UpdateData(baseurl+'student/me', {
-        group_id:getCookie('group_id')
+        group_id:id
     })
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.error(error)); 
