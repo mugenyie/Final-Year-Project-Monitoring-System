@@ -1,7 +1,7 @@
 #src/app.py
 
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from .config import app_config
 from .models import db, bcrypt
 from .apiviews.SupervisorView import supervisor_api
@@ -17,6 +17,7 @@ def create_app(env_name):
   
   # app initiliazation
   app = Flask(__name__)
+  cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
   
   app.config.from_object(app_config[env_name])
 
@@ -24,7 +25,6 @@ def create_app(env_name):
   bcrypt.init_app(app)
   db.init_app(app)
 
-  CORS(app)
   api_version = "/api/v1/"
   app.register_blueprint(supervisor_api, url_prefix='{}supervisor'.format(api_version))
   app.register_blueprint(student_api, url_prefix='{}student'.format(api_version))
