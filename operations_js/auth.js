@@ -22,21 +22,6 @@ function PostLoginData(){
     }
 }
 
-async function PostData(url = '', data = {}) {
-    // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
-    return await response.json(); // parses JSON response into native Javascript objects 
-}
-
 function registerStudentCookies(data){
     setCookie('auth_token', data.api_token, 30);
     setCookie('id', data.user.id, 30);
@@ -48,14 +33,16 @@ function registerStudentCookies(data){
     setCookie('phonenumber', data.user.phonenumber, 30);
     setCookie('user_role_name', data.user.user_role_name, 30);
     setCookie('user_role_value', data.user.user_role_value, 30);
+    setCookie('project_id', data.user.project_id, 30);
 
     console.log("Cookie data => "+document.cookie);
 }
 
 function LoginStudent(email, password){
     console.log("student login called "+email+" "+password);
-    PostData('https://csc-fypms.herokuapp.com/api/v1/student/login', {email:email, password:password})
+    PostData(baseurl+'student/login', {email:email, password:password})
     .then(data => {
+        console.log(JSON.stringify(data));
         registerStudentCookies(data);
         window.location.href = "student_.html"; 
     }) 
@@ -72,7 +59,7 @@ function SignUpStudent(){
     let phonenumber = document.getElementById('r-phonenumber').value;
     let student_number = document.getElementById('r-student_number').value;
     
-    PostData('https://csc-fypms.herokuapp.com/api/v1/student/', {
+    PostData(baseurl+'student/', {
         course:course,
         email:email, 
         name:name,
@@ -94,7 +81,7 @@ function LoginSupervisor(){
     let email = document.getElementById('r-email').value;
     let password = document.getElementById('r-password').value;
     
-    fetch('https://csc-fypms.herokuapp.com/api/v1/supervisor/login', {
+    fetch(baseurl+'supervisor/login', {
         method: 'POST',
         body:JSON.stringify({
             email:email, 
@@ -129,7 +116,7 @@ function LoginAdmin(){
     let email = document.getElementById('r-email').value;
     let password = document.getElementById('r-password').value;
     
-    fetch('https://csc-fypms.herokuapp.com/api/v1/admin/login', {
+    fetch(baseurl+'admin/login', {
         method: 'POST',
         body:JSON.stringify({
             email:email, 
@@ -171,7 +158,7 @@ function SignUpSupervisor(){
     let phonenumber = document.getElementById('r-phonenumber').value;
     let title = document.getElementById('r-title').value;
     
-    fetch('https://csc-fypms.herokuapp.com/api/v1/supervisor/', {
+    fetch(baseurl+'/api/v1/supervisor/', {
         method: 'POST',
         body:JSON.stringify({
             department:department,
@@ -204,7 +191,7 @@ function SignUpAdmin(){
     let password = document.getElementById('r-password').value;
     let phonenumber = document.getElementById('r-phonenumber').value;
     
-    fetch('https://csc-fypms.herokuapp.com/api/v1/admin/', {
+    fetch(baseurl+'/api/v1/admin/', {
         method: 'POST',
         body:JSON.stringify({
             email:email, 
@@ -231,13 +218,4 @@ function SignUpAdmin(){
     .catch(err => {
         console.log(err);
     });
-}
-
- 
-// Cookie management
-
-function setCookie(name, value, days) {
-    var d = new Date;
-    d.setTime(d.getTime() + 24*60*60*1000*days);
-    document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
 }

@@ -1,61 +1,17 @@
 let member_list = "";
 let member_count = 0;
-async function PostData(url = '', data = {}) {
-    // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'POST',
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-            'api-token': auth_token
-        },
-        body: JSON.stringify(data),
-    });
-    return await response.json(); // parses JSON response into native Javascript objects 
-}
 
-async function GetData(url = '') {
-    // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'api-token': auth_token
-        },
-    });
-    return await response.json(); // parses JSON response into native Javascript objects 
-}
-
-async function UpdateData(url = '', data = {}) {
-    // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'PUT',
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-            'api-token': auth_token
-        },
-        body: JSON.stringify(data),
-    });
-    return await response.json(); // parses JSON response into native Javascript objects 
-}
-
-function createStudent(name, email, phonenumber, student_number, password){
+function createStudent(student_id,name, email, phonenumber, student_number, password, course, group_id){
     console.log("create student "+name)
-    PostData('https://csc-fypms.herokuapp.com/api/v1/student/', {
-        course:getCookie('course'),
+    PostData(baseurl+'student/', {
+        id:student_id,
+        course:course,
         email:email, 
         name:name,
         password:password,
         phonenumber:phonenumber,
         student_number:student_number,
-        group_id:getCookie('group_id')
+        group_id:group_id
     })
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.error(error));  
@@ -67,16 +23,19 @@ function AddStudent(){
     console.log("Adding new student");
 
     createStudent(
+        create_UUID(),
         document.getElementById('r-name').value,
         document.getElementById('r-email').value,
         document.getElementById('r-phonenumber').value,
         document.getElementById('r-student_number').value,
-        document.getElementById('r-password').value
+        document.getElementById('r-password').value,
+        getCookie('course'),
+        getCookie('group_id')
     );
 }
 
 function GetGroupMembers(){
-    GetData('https://csc-fypms.herokuapp.com/api/v1/student/group/'+getCookie('group_id')+'/members')
+    GetData(baseurl+'student/group/'+getCookie('group_id')+'/members')
     .then(function(data) {
         data.forEach(element => {
             member_count+=1;
