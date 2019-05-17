@@ -17,7 +17,6 @@ def create_app(env_name):
   
   # app initiliazation
   app = Flask(__name__)
-  CORS(app)
   
   app.config.from_object(app_config[env_name])
 
@@ -25,6 +24,7 @@ def create_app(env_name):
   bcrypt.init_app(app)
   db.init_app(app)
 
+  CORS(app)
   api_version = "/api/v1/"
   app.register_blueprint(supervisor_api, url_prefix='{}supervisor'.format(api_version))
   app.register_blueprint(student_api, url_prefix='{}student'.format(api_version))

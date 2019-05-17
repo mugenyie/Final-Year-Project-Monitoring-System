@@ -12,6 +12,7 @@ class ProjectModel(BaseModel):
     name = db.Column(db.String(128), nullable=False)
     git_url = db.Column(db.String(128), nullable=True)
     web_url = db.Column(db.String(128), nullable=True)
+    description = db.Column(db.String(500), nullable=True)
     score = db.Column(db.Integer, nullable=False, default=0)
     proposal_file = db.Column(db.String(128), nullable=True)
     documentation_file = db.Column(db.String(128), nullable=True)
@@ -27,6 +28,9 @@ class ProjectModel(BaseModel):
         self.score = data.get('score')
         self.proposal_file = data.get('proposal_file')
         self.documentation_file = data.get('documentation_file')
+        self.created_by = data.get('created_by')
+        self.description = data.get('description')
+        self.supervisor_id = data.get('supervisor_id')
 
     def __str__(self):
         return "<id: {}>".format(self.id)
@@ -67,10 +71,7 @@ class ProjectSchema(Schema):
     proposal_file = fields.Str(required=False)
     documentation_file = fields.Str(required=False)
     created_by = fields.Str(required=True)
+    description = fields.Str(required=True)
     supervisor_id = fields.Int(required=False)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)
-
-
-
-    

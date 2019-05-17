@@ -23,6 +23,8 @@ class GroupModel(BaseModel):
         self.name = data.get('name')
         self.number = data.get('number')
         self.created_by = data.get('created_by')
+        self.project_id = data.get('project_id')
+        self.supervisor_id = data.get('supervisor_id')
 
     def __str__(self):
         return "<id: {}>".format(self.id)

@@ -27,6 +27,8 @@ class ProjectLogModel(BaseModel):
         self.score = data.get('score')
         self.supervisor_remarks = data.get('supervisor_remarks')
         self.source_link = data.get('source_link')
+        self.project_id = data.get('project_id')
+        self.student_id = data.get('student_id')
 
     def __str__(self):
         return "<id: {}>".format(self.id)
@@ -35,13 +37,16 @@ class ProjectLogModel(BaseModel):
     def save(self):
         db.session.add(self)
         db.session.commit()
-    @staticmethod
-    def get_by_student(student_id):
-        return ProjectLogModel.query.filter_by(student_id=student_id).order_by(ProjectLogModel.created_at.desc()).first()
+
+    def update():
+        for key, item in data.items():
+            setattr(self, key, item)
+        self.modified_at = datetime.datetime.utcnow()
+        db.session.commit()
 
     @staticmethod
-    def get_by_project(project_id):
-        return ProjectLogModel.query.filter_by(project_id=project_id).order_by(ProjectLogModel.created_at.desc())
+    def get_by_student(student_id):
+        return ProjectLogModel.query.filter_by(student_id=student_id).order_by(ProjectLogModel.created_at.desc())
 
 
 class ProjectLogSchema(Schema):
