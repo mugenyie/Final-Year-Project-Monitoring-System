@@ -1,6 +1,6 @@
 let created_by = getCookie('id');
 let auth_token = getCookie('auth_token') == null?"":getCookie('auth_token');
-let baseurl = "https://csc-fypms.herokuapp.com/api/v1/";
+let baseurl = "http://127.0.0.1:5000/api/v1/";
 console.log(created_by);
 console.log(auth_token);
 
@@ -8,7 +8,7 @@ async function PostData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST',
-        mode:"no-cors",
+        mode:"cors",
         headers: {
             'Content-Type': 'application/json',
             'api-token': auth_token

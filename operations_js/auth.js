@@ -15,10 +15,12 @@ function PostLoginData(){
         LoginStudent(email, password);
     }
     if(category == 1){
-        LoginAdmin();
+        console.log('supervisor')
+        LoginSupervisor(email, password)
     }
     if(category == 2){
-        LoginSupervisor();
+        console.log('Admin')
+        LoginAdmin(email, password)
     }
 }
 
@@ -38,6 +40,33 @@ function registerStudentCookies(data){
     console.log("Cookie data => "+document.cookie);
 }
 
+function registerSupervisorCookies(data){
+    setCookie('auth_token', data.api_token, 30);
+    setCookie('id', data.user.id, 30);
+    setCookie('email', data.user.email, 30);
+    setCookie('name', data.user.name, 30);
+    setCookie('department', data.user.course, 30);
+    setCookie('Title', data.user.group_id, 30);
+    setCookie('phonenumber', data.user.phonenumber, 30);
+    setCookie('user_role_name', data.user.user_role_name, 30);
+    setCookie('user_role_value', data.user.user_role_value, 30);
+
+    console.log("Cookie data => "+document.cookie);
+}
+
+function registerAdminCookies(data){
+    setCookie('auth_token', data.api_token, 30);
+    setCookie('id', data.user.id, 30);
+    setCookie('email', data.user.email, 30);
+    setCookie('name', data.user.name, 30);
+    setCookie('Title', data.user.group_id, 30);
+    setCookie('phonenumber', data.user.phonenumber, 30);
+    setCookie('user_role_name', data.user.user_role_name, 30);
+    setCookie('user_role_value', data.user.user_role_value, 30);
+
+    console.log("Cookie data => "+document.cookie);
+}
+
 function LoginStudent(email, password){
     console.log("student login called "+email+" "+password);
     PostData(baseurl+'student/login', {email:email, password:password})
@@ -47,6 +76,28 @@ function LoginStudent(email, password){
         window.location.href = "student_.html"; 
     }) 
     .catch(error => console.error(error));    
+}
+
+function LoginSupervisor(email, password){
+    console.log("supervisor login called "+email+" "+password);
+    PostData(baseurl+'supervisor/login', {email:email, password:password})
+    .then(data => {
+        console.log(JSON.stringify(data));
+        registerStudentCookies(data);
+        window.location.href = "supervisor_.html"; 
+    }) 
+    .catch(error => console.error(error)); 
+}
+
+function LoginAdmin(email, password){
+    console.log("Admin login called "+email+" "+password);
+    PostData(baseurl+'admin/login', {email:email, password:password})
+    .then(data => {
+        console.log(JSON.stringify(data));
+        registerStudentCookies(data);
+        window.location.href = "admin_.html"; 
+    }) 
+    .catch(error => console.error(error)); 
 }
 
 function SignUpStudent(){
@@ -76,148 +127,56 @@ function SignUpStudent(){
     .catch(error => console.error(error));    
 }
 
-
-function LoginSupervisor(){
-    event.preventDefault();
-
-    let email = document.getElementById('r-email').value;
-    let password = document.getElementById('r-password').value;
-    
-    fetch(baseurl+'supervisor/login', {
-        method: 'POST',
-        body:JSON.stringify({
-            email:email, 
-            password:password
-        })
-    }).then((res) => res.json())
-    .then(data => {
-        if(data.error != null){
-
-        }else{
-            setCookie('auth-token', data.api-token, 30);
-            setCookie('id', data.data[0].id, 30);
-            setCookie('email', data.data[0].email, 30);
-            setCookie('name', data.data[0].user.name, 30);
-            setCookie('phonenumber', data.data[0].user.phonenumber, 30);
-            setCookie('user_role_name', data.data[0].user.user_role_name, 30);
-            setCookie('user_role_value', data.data[0].user.user_role_value, 30);
-            setCookie('department', data.data[0].user.department, 30);
-            setCookie('title', data.data[0].user.title, 30);
-            
-            window.location.href = "supervisor_.html"; 
-        } 
-    })
-    .catch(err => {
-        console.log(err);
-    });
-}
-
-function LoginAdmin(){
-    event.preventDefault();
-
-    let email = document.getElementById('r-email').value;
-    let password = document.getElementById('r-password').value;
-    
-    fetch(baseurl+'admin/login', {
-        method: 'POST',
-        body:JSON.stringify({
-            email:email, 
-            password:password
-        })
-    }).then((res) => res.json())
-    .then(data => {
-        if(data.error != null){
-
-        }else{
-            setCookie('auth-token', data.api-token, 30);
-            setCookie('id', data.data[0].id, 30);
-            setCookie('email', data.data[0].email, 30);
-            setCookie('name', data.data[0].user.name, 30);
-            setCookie('phonenumber', data.data[0].user.phonenumber, 30);
-            setCookie('user_role_name', data.data[0].user.user_role_name, 30);
-            setCookie('user_role_value', data.data[0].user.user_role_value, 30);
-            
-            window.location.href = "admin_.html"; 
-        } 
-    })
-    .catch(err => {
-        console.log(err);
-    });
-}
-
-
-// SignUp
-
-
-
 function SignUpSupervisor(){
     event.preventDefault();
-
+    console.log("signup supervisor");
+    let id = create_UUID();
+    let title = document.getElementById('r-title').value;
     let department = document.getElementById('r-department').value;
     let email = document.getElementById('r-email').value;
     let name = document.getElementById('r-name').value;
     let password = document.getElementById('r-password').value;
     let phonenumber = document.getElementById('r-phonenumber').value;
-    let title = document.getElementById('r-title').value;
     
-    fetch(baseurl+'/api/v1/supervisor/', {
-        method: 'POST',
-        body:JSON.stringify({
-            department:department,
-            email:email, 
-            name:name,
-            password:password,
-            phonenumber:phonenumber,
-            title:title
-        })
-    }).then((res) => res.json())
-    .then(data => {
-        if(data.error != null){
-            
-        }else{
-            setCookie('auth-token', data.token, 30);
-            
-            window.location.href = "supervisor_.html"; 
-        } 
+    PostData(baseurl+'supervisor/', {
+        id:id,
+        title:title,
+        department:department,
+        email:email, 
+        name:name,
+        password:password,
+        phonenumber:phonenumber
     })
-    .catch(err => {
-        console.log(err);
-    });
+    .then(data => {
+        console.log(JSON.stringify(data))
+        registerSupervisorCookies(data);
+        window.location.href = "supervisor_.html"; 
+    })
+    .catch(error => console.error(error));    
 }
 
 function SignUpAdmin(){
     event.preventDefault();
-
+    console.log("signup admin");
+    let id = create_UUID();
+    let title = document.getElementById('r-title').value;
     let email = document.getElementById('r-email').value;
     let name = document.getElementById('r-name').value;
     let password = document.getElementById('r-password').value;
     let phonenumber = document.getElementById('r-phonenumber').value;
     
-    fetch(baseurl+'/api/v1/admin/', {
-        method: 'POST',
-        body:JSON.stringify({
-            email:email, 
-            name:name,
-            password:password,
-            phonenumber:phonenumber
-        })
-    }).then((res) => res.json())
-    .then(data => {
-        if(data.error != null){
-            
-        }else{
-            setCookie('auth-token', data.token, 30);
-            setCookie('id', data.data[0].id, 30);
-            setCookie('email', data.data[0].email, 30);
-            setCookie('name', data.data[0].user.name, 30);
-            setCookie('phonenumber', data.data[0].user.phonenumber, 30);
-            setCookie('user_role_name', data.data[0].user.user_role_name, 30);
-            setCookie('user_role_value', data.data[0].user.user_role_value, 30);
-            
-            window.location.href = "admin_.html"; 
-        } 
+    PostData(baseurl+'admin/', {
+        id:id,
+        title:title,
+        email:email, 
+        name:name,
+        password:password,
+        phonenumber:phonenumber
     })
-    .catch(err => {
-        console.log(err);
-    });
+    .then(data => {
+        console.log(JSON.stringify(data))
+        registerAdminCookies(data);
+        window.location.href = "admin_.html"; 
+    })
+    .catch(error => console.error(error));    
 }

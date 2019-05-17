@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="">
-
-<!-- Mirrored from www.klevermedia.co.uk/assets/dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 11:54:45 GMT -->
 <head>
 <meta charset="utf-8">
-<title>Retina Dashboard</title>
+<title>New Admin</title>
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta name="robots" content="" />
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="css/style.css" media="all" />
+<script src="operations_js/operations.js"></script>
+<script src="operations_js/auth.js"></script>
 <!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
@@ -38,60 +38,20 @@ label{
 		</style>
 <section>
 <h1>Register New Admin</h1>
-<form method="link" action="dashboard.html">
-<input type="text" value="Title (Dr., Prof.)" />
-<input type="text" value="Full Name" />
-<input type="email" value="Email" />
-<input type="text" value="+256000000000" />
-<input type="text" value="Department" />
+<form onsubmit="SignUpAdmin()">
+<input id="r-title" type="text" value="Title (Dr., Prof.)" />
+<input id="r-name" type="text" value="Full Name" />
+<input id="r-email" type="email" value="Email" />
+<input id="r-phonenumber" type="text" value="+256000000000" />
 <label for="">Password</label>
-<input value="Password" type="password" />
+<input id="r-password" value="Password" type="password" />
 <label for="">Confirm Password</label>
 <input value="Confirm Password" type="password" />
-<button class="green">Register</button>
+<button type="submit" class="green">Register</button>
 </form>
 <p><a href="select.html">Register new (Group, Admin or Supervisor)</a></p>
 <p><a href=""><a href="#">Forgot your password?</a></a></p>
 </section>
-<script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript">
-// Page load delay by Curtis Henson - http://curtishenson.com/articles/quick-tip-delay-page-loading-with-jquery/
-$(function(){
-	$('.login button').click(function(e){ 
-		// Get the url of the link 
-		var toLoad = $(this).attr('href');  
- 
-		// Do some stuff 
-		$(this).addClass("loading"); 
- 
-			// Stop doing stuff  
-			// Wait 700ms before loading the url 
-			setTimeout(function(){window.location = toLoad}, 10000);	  
- 
-		// Don't let the link do its natural thing 
-		e.preventDefault
-	});
-	
-	$('input').each(function() {
 
-       var default_value = this.value;
-
-       $(this).focus(function(){
-               if(this.value == default_value) {
-                       this.value = '';
-               }
-       });
-
-       $(this).blur(function(){
-               if(this.value == '') {
-                       this.value = default_value;
-               }
-       });
-
-});
-});
-</script>
 </body>
-
-<!-- Mirrored from www.klevermedia.co.uk/assets/dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 11:54:45 GMT -->
 </html>

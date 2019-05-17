@@ -1,6 +1,3 @@
-// document.getElementById('r-group_name').value = getCookie('group_name');
-// document.getElementById('r-group_number').value = getCookie('group_name');
-
 function GetUserGroup(){
     GetData(baseurl+'group/'+getCookie('group_id'))
     .then(data => {
@@ -16,9 +13,6 @@ async function CreateGroup(){
     event.preventDefault()
     let id = create_UUID();
     await createNewGroup(id,document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
-    setTimeout()
-    //Update my group id
-    updateStudent(id);
 }
 
 function createNewGroup(id,name, number){
@@ -31,12 +25,13 @@ function createNewGroup(id,name, number){
     })
     .then(data => {
         console.log(JSON.stringify(data));
+        updateMyGroupId(data.id);
         setCookie('group_id', data.id, 30);
     })
     .catch(error => console.error(error));  
 }
 
-function updateStudent(id){
+function updateMyGroupId(group_id){
     UpdateData(baseurl+'student/me', {
         group_id:id
     })

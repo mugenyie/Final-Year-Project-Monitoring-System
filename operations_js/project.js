@@ -23,22 +23,31 @@ function CreateOrUpdateProject(){
     }
 }
 
-function CreateProject(name,git,web,proposal,documentation,description){
-    PostData(baseurl+'project/', {
-        name:name,
-        git_url:git, 
-        web_url:web,
-        proposal_file:proposal,
-        documentation_file:documentation,
-        description:description,
-        created_by:getCookie('id')
-    })
-    .then(data => console.log(JSON.stringify(data)))
-    .catch(error => console.error(error));  
+function CreateProject(name,git,web,proposal,documentation,description){ 
+    let id = create_UUID();
+    fetch(baseurl+'project/', {
+        method: 'POST',
+        mode:"no-cors",
+        headers : {
+            'Content-Type': 'application/json',
+            'api-token': getCookie('auth_token')
+        },
+        body:JSON.stringify({
+            id:id,
+            name:name,
+            git_url:git, 
+            web_url:web,
+            proposal_file:proposal,
+            documentation_file:documentation,
+            description:description,
+            created_by:getCookie('id')
+        })
+    }); 
+    setCookie('project_id')=id;
 }
 
 function GetProject(){
-    if(getCookie('project_id') != null){
+    if(getCookie('project_id') != 'null'){
         GetData(baseurl+'project/'+getCookie('project_id'))
         .then(data => {
             document.getElementById('r-project_name').value = data.name;

@@ -1,20 +1,49 @@
 let member_list = "";
 let member_count = 0;
 
-function createStudent(student_id,name, email, phonenumber, student_number, password, course, group_id){
-    console.log("create student "+name)
-    PostData(baseurl+'student/', {
-        id:student_id,
-        course:course,
-        email:email, 
-        name:name,
-        password:password,
-        phonenumber:phonenumber,
-        student_number:student_number,
-        group_id:group_id
-    })
-    .then(data => console.log(JSON.stringify(data)))
-    .catch(error => console.error(error));  
+async function PostmemberData(url = '', data = {}) {
+    // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST',
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'api-token': getCookie('auth_token')
+        },
+        body: JSON.stringify(data),
+    });
+    return await response.json(); // parses JSON response into native Javascript objects 
+}
+function AddMember(){
+    event.preventDefault();
+    console.log("signup student");
+    let id = create_UUID();
+    console.log(id);
+    let group_id = getCookie('group_id');
+    let course = getCookie('course');
+    let email = document.getElementById('r-email').value;
+    let name = document.getElementById('r-name').value;
+    let password = document.getElementById('r-password').value;
+    let phonenumber = document.getElementById('r-phonenumber').value;
+    let student_number = document.getElementById('r-student_number').value;
+    fetch(baseurl+'student/', {
+        method: 'POST',
+        mode:"no-cors",
+        headers : {
+            'Content-Type': 'application/json',
+            'api-token': getCookie('auth_token')
+        },
+        body:JSON.stringify({
+            id:id,
+            course:course,
+            email:email, 
+            name:name,
+            password:password,
+            phonenumber:phonenumber,
+            student_number:student_number,
+            group_id:group_id
+        })
+    });   
 }
 
 function AddStudent(){
