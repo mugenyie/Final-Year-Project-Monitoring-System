@@ -7,10 +7,8 @@ console.log(auth_token);
 async function PostData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'omit',
         method: 'POST',
+        mode:"no-cors",
         headers: {
             'Content-Type': 'application/json',
             'api-token': auth_token
@@ -23,9 +21,6 @@ async function PostData(url = '', data = {}) {
 async function GetData(url = '') {
     // Default options are marked with *
       const response = await fetch(url, {
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'omit',
         method: 'GET',
         headers: {
             'api-token': auth_token
@@ -38,8 +33,6 @@ async function UpdateData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
         mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'omit',
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
