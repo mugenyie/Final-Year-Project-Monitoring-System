@@ -1,5 +1,5 @@
 let created_by = getCookie('id');
-let auth_token = getCookie('auth_token');
+let auth_token = getCookie('auth_token') == null?"":getCookie('auth_token');
 let baseurl = "https://csc-fypms.herokuapp.com/api/v1/";
 console.log(created_by);
 console.log(auth_token);
@@ -8,11 +8,9 @@ async function PostData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
+            'api-token': auth_token
         },
         body: JSON.stringify(data),
     });
@@ -23,9 +21,6 @@ async function GetData(url = '') {
     // Default options are marked with *
       const response = await fetch(url, {
         method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'api-token': auth_token
         },
@@ -37,9 +32,6 @@ async function UpdateData(url = '', data = {}) {
     // Default options are marked with *
       const response = await fetch(url, {
         method: 'PUT',
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
             'api-token': auth_token

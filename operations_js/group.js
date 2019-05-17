@@ -1,5 +1,5 @@
-document.getElementById('r-group_name').value = getCookie('group_name');
-document.getElementById('r-group_number').value = getCookie('group_name');
+// document.getElementById('r-group_name').value = getCookie('group_name');
+// document.getElementById('r-group_number').value = getCookie('group_name');
 
 function GetUserGroup(){
     GetData(baseurl+'group/'+getCookie('group_id'))
@@ -12,10 +12,10 @@ function GetUserGroup(){
     .catch(error => console.error(error));  
 }
 
-function CreateGroup(){
+async function CreateGroup(){
     event.preventDefault()
 
-    createNewGroup(document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
+    await createNewGroup(document.getElementById('r-group_name').value, document.getElementById('r-group_number').value)
     //Update my group id
     updateStudent();
 }
