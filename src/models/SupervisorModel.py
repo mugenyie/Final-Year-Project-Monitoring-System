@@ -15,6 +15,7 @@ class SupervisorModel(UserModel, BaseModel):
     def __init__(self, data):
         BaseModel.__init__(self, data)
         UserModel.__init__(self, data)
+        self.id = data.get('id')
         self.user_role_name = UserRoleEnum.SUPERVISOR.name
         self.user_role_value = UserRoleEnum.SUPERVISOR.value
         self.department = data.get("department")

@@ -22,6 +22,7 @@ class ProjectModel(BaseModel):
     # class constructor
     def __init__(self, data):
         BaseModel.__init__(self, data)
+        self.id = data.get('id')
         self.name = data.get('name')
         self.git_url = data.get('git_url')
         self.web_url = data.get('web_url')
@@ -35,11 +36,11 @@ class ProjectModel(BaseModel):
     def __str__(self):
         return "<id: {}>".format(self.id)
 
-    def save():
+    def save(self):
         db.session.add(self)
         db.session.commit()
 
-    def update():
+    def update(self):
         for key, item in data.items():
             setattr(self, key, item)
         self.modified_at = datetime.datetime.utcnow()

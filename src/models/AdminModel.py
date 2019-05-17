@@ -13,6 +13,7 @@ class AdminModel(UserModel, BaseModel):
     def __init__(self, data):
         BaseModel.__init__(self, data)
         UserModel.__init__(self, data)
+        self.id = data.get('id')
         self.user_role_name = UserRoleEnum.ADMIN.name
         self.user_role_value = UserRoleEnum.ADMIN.value
 

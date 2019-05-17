@@ -23,6 +23,7 @@ class StudentModel(UserModel, BaseModel):
         """
         BaseModel.__init__(self, data)
         UserModel.__init__(self, data)
+        self.id=data.get('id')
         self.user_role_name = UserRoleEnum.STUDENT.name
         self.user_role_value = UserRoleEnum.STUDENT.value
         self.student_number = data.get('student_number')

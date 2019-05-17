@@ -1,6 +1,7 @@
 #/src/views/SupervisorView
 
 from flask import request, json, Response, Blueprint, g, jsonify
+from flask_cors import CORS, cross_origin
 from ..models import SupervisorModel, SupervisorSchema
 from ..services.AuthorizationService import Auth
 from . import custom_response
@@ -18,12 +19,11 @@ def create():
     data, error = supervisor_schema.load(req_data)
     if error:
         return custom_response(error, 400)
-    try:
-        supervisor = SupervisorModel(data).save()
-        data,error = supervisor_schema.dump(supervisor)
-        return custom_response({data, error}, 201)
-    except Exception:
-        return custom_response({"message":"User with email or phone already registered"}, 400)
+    supervisor = SupervisorModel(data)
+    supervisor.save()
+    supervisor_data = supervisor_schema.dump(supervisor).data
+    token = Auth.generate_token(supervisor_data.get('id'), supervisor_data.get('user_role_value'))
+    return custom_response({'api_token': token, 'user':supervisor_data}, 201)
 
 @Auth.auth_required
 @supervisor_api.route('/', methods=['GET'])

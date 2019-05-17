@@ -1,6 +1,7 @@
 #/src/views/StudentView
 
 from flask import request, json, Response, Blueprint, g
+from flask_cors import CORS, cross_origin
 from ..models.StudentModel import StudentModel, StudentSchema
 from ..services.AuthorizationService import Auth
 from ..apiviews import custom_response
@@ -10,11 +11,12 @@ student_schema = StudentSchema()
 students_schema = StudentSchema(many=True)
 
 @student_api.route('/', methods=['POST'])
+@cross_origin()
 def create():
   """
   Create new student
   """
-  req_data = request.get_json()
+  req_data = request.get_json(force=True)
   data, error = student_schema.load(req_data)
 
   if error:

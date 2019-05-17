@@ -1,6 +1,7 @@
 #/src/views/ProjectView
 
 from flask import request, json, Response, Blueprint, g
+from flask_cors import CORS, cross_origin
 from ..models.ProjectModel import ProjectModel, ProjectSchema
 from ..services.AuthorizationService import Auth
 from ..apiviews import custom_response
@@ -10,11 +11,12 @@ project_schema = ProjectSchema()
 projects_schema = ProjectSchema(many=True)
 
 @project_api.route('/', methods=['POST'])
+@cross_origin()
 def create():
   """
   Create new project
   """
-  req_data = request.get_json()
+  req_data = request.get_json(force=True)
   data, error = project_schema.load(req_data)
 
   if error:
