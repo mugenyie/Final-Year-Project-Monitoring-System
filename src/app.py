@@ -17,7 +17,7 @@ def create_app(env_name):
   
   # app initiliazation
   app = Flask(__name__)
-  cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+  cors = CORS(app, origins=['http://localhost',r'^https://mugenyie.github.io$'])
   
   app.config.from_object(app_config[env_name])
 
