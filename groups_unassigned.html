@@ -1,92 +1,36 @@
 <!DOCTYPE html>
 <html lang="">
 
-<!-- Mirrored from www.klevermedia.co.uk/assets/dashboard/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 11:54:27 GMT -->
 <head>
 <meta charset="utf-8">
-<title>Retina Dashboard</title>
+<title>Student Project Monitoring System</title>
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta name="robots" content="" />
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="css/style.css" media="all" />
+<script src="operations_js/operations.js"></script>
+<script src="operations_js/group.js"></script>
 <!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body>
+<body onload="displayUnassigned()">
 <div class="testing">
 <header class="main">
-<h1><strong>Retina</strong> Dashboard</h1>
-<input type="text" value="search" />
+<h1><strong>Student </strong> Project Monitoring System | Admin</h1>
 </header>
 <section class="user">
 <div class="profile-img">
-<p><img src="images/uiface2.png" alt="" height="40" width="40" /> Welcome back John Doe</p>
+<p><img src="images/person.jpg" alt="" height="40" width="40" /> Welcome back <span id="username"></span></p>
 </div>
 <div class="buttons">
 <button class="ico-font">&#59157;</button>
 <span class="button dropdown">
 <a href="#">Notifications <span class="pip">4</span></a>
-<ul class="notice">
-<li>
-<hgroup>
-<h1>You have a new task</h1>
-<h2>Report web statistics week by week.</h2>
-</hgroup>
-<p><span>14:24</span></p>
-</li>
-<li>
-<hgroup>
-<h1>New comment</h1>
-<h2>Comment on <em>About page</em> by Darren.</h2>
-</hgroup>
-<p><span>11:04</span></p>
-</li>
-<li>
-<hgroup>
-<h1>Broken link</h1>
-<h2>We've spotted a broken link on the <em>Blog page</em>.</h2>
-</hgroup>
-<p><span>10:46</span></p>
-</li>
-<li>
-<hgroup>
-<h1>User report</h1>
-<h2><em>Lee Grant</em> has been promoted to admin.</h2>
-</hgroup>
-<p><span>09:57</span></p>
-</li>
-</ul>
 </span>
 <span class="button dropdown">
 <a href="#">Inbox <span class="pip">6</span></a>
-<ul class="notice">
-<li>
-<hgroup>
-<h1>Hi, I need a favour</h1>
-<h2>John Doe</h2>
-<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-</hgroup>
-<p><span>11:24</span></p>
-</li>
-<li>
-<hgroup>
-<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-<h2>John Doe</h2>
-<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-</hgroup>
-<p><span>11:24</span></p>
-</li>
-<li>
-<hgroup>
-<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-<h2>John Doe</h2>
-<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
- </hgroup>
-<p><span>11:24</span></p>
-</li>
-</ul>
 </span>
 <span class="button">Live</span>
 <span class="button">Help</span>
@@ -98,7 +42,7 @@
 <!-- navigations -->
 <nav>
         <ul>
-        <li class="section"><a href="."><span class="icon">&#59176;</span> Dashboard</a></li>
+        <li class="section"><a href="admin_.html"><span class="icon">&#59176;</span> Dashboard</a></li>
         <li>
         <a href="#"><span class="icon">&#128196;</span>Groups</a>
         <ul class="submenu">
@@ -107,12 +51,12 @@
         </ul>
         </li>
         <li>
-        <a href="supervisors.html"><span class="icon">&#127748;</span>Supervisors <span class="pip">7</span></a>
+        <a href="supervisors.html"><span class="icon">&#127748;</span>Supervisors </a>
         </li>
         <li>
-        <a href="students.html"><span class="icon">&#59160;</span> Students <span class="pip">12</span></a>
+        <a href="students.html"><span class="icon">&#59160;</span> Students </a>
         </li>
-        <li><a href="administrators.html"><span class="icon">&#128202;</span> Administrators</a></li>
+        <!-- <li><a href="administrators.html"><span class="icon">&#128202;</span> Administrators</a></li> -->
         
         </li>
         </ul>
@@ -126,7 +70,7 @@
                 <span class="icon">📄</span>
                 <hgroup>
                 <h1>Groups Unassigned</h1>
-                <h2>(10)</h2>
+                <h2>(<span id="group-count"></span>)</h2>
                 </hgroup>
                 
                 </header>
@@ -134,77 +78,17 @@
                 <table id="myTable" border="0" width="100">
                 <thead>
                 <tr>
-                <th>Page title</th>
-                <th>Date</th>
-                <th>Child pages</th>
-                <th>Comments</th>
-                <th>Author</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Project Id</th>
+                <th>Supervisor Id</th>
+                <th>Created On</th>
+                <th></th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                <td><input type="checkbox"> Home</td>
-                <td>01/3/2013</td>
-                <td>0</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> Services</td>
-                <td>01/3/2013</td>
-                <td>4</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> Portfolio</td>
-                <td>02/3/2013</td>
-                <td>12</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> About us</td>
-                <td>02/3/2013</td>
-                <td>2</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> Blog</td>
-                <td>02/3/2013</td>
-                <td>32</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> Contact us</td>
-                <td>03/3/2013</td>
-                <td>0</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> Our clients</td>
-                <td>04/3/2013</td>
-                <td>1</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox"> Partnerships</td>
-                <td>04/3/2013</td>
-                <td>0</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox">Jobs</td>
-                <td>04/3/2013</td>
-                <td>0</td>
-                <td>0</td>
-                <td>John Doe</td>
-                </tr>
+                <tbody id="group-list">
+
+
                 </tbody>
                 </table>
                 </div>
@@ -212,28 +96,9 @@
 
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="js/jquery.wysiwyg.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/cycle.js"></script>
-<script src="js/jquery.checkbox.min.js"></script>
-<script src="js/flot.js"></script>
-<script src="js/flot.resize.js"></script>
-<script src="js/flot-time.js"></script>
-<script src="js/flot-pie.js"></script>
-<script src="js/flot-graphs.js"></script>
-<script src="js/cycle.js"></script>
 <script src="js/jquery.tablesorter.min.js"></script>
-<script type="text/javascript">
-// Feature slider for graphs
-$('.cycle').cycle({
-	fx: "scrollHorz",
-	timeout: 0,
-    slideResize: 0,
-    prev:    '.left-btn', 
-    next:    '.right-btn'
-});
-</script>
+
 </body>
 
-<!-- Mirrored from www.klevermedia.co.uk/assets/dashboard/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 11:54:37 GMT -->
 </html>

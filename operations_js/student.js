@@ -14,3 +14,30 @@ function getStudentDetails(){
     var div = document.getElementById('userDetails');
     div.innerHTML = detail_list;
 }
+
+let student_list = "";
+let count = 0;
+function displayStudents(){
+    GetData(baseurl+'student/')
+    .then(data => {
+        console.log(JSON.stringify(data));
+        data.forEach(element => {
+            count+=1;
+            student_list += `
+            <tr>
+            <td>${element.name}</td>
+            <td>${element.email}</td>
+            <td>${element.course}</td>
+            <td>${element.phonenumber}</td>
+            <td>${element.group_id}</td>
+            <td>${element.project_id}</td>
+            <td>${element.created_on}</td>
+            </tr>
+            `;
+        });
+        
+        document.getElementById('student-list').innerHTML = student_list;
+        document.getElementById('count').textContent = count;
+    })
+    .catch(error => console.error(error));  
+}

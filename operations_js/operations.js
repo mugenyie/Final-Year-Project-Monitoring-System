@@ -38,7 +38,7 @@ async function UpdateData(url = '', data = {}) {
             'Content-Type': 'application/json',
             'api-token': auth_token
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
     });
     return await response.json(); // parses JSON response into native Javascript objects 
 }
@@ -82,4 +82,17 @@ function checkToken() {
     }else{
         document.getElementById("username").textContent=getCookie('name');
     }
+}
+
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
 }
