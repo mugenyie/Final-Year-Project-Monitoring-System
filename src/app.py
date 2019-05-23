@@ -7,8 +7,9 @@ from .models import db, bcrypt
 from .apiviews.SupervisorView import supervisor_api
 from .apiviews.StudentView import student_api
 from .apiviews.AdminView import admin_api
-from .apiviews.GroupView import group_api
+from .apiviews.GroupView import group_api, groups_api
 from .apiviews.ProjectView import project_api
+from .apiviews.StatView import stat_api
 
 def create_app(env_name):
   """
@@ -30,7 +31,9 @@ def create_app(env_name):
   app.register_blueprint(student_api, url_prefix='{}student'.format(api_version))
   app.register_blueprint(admin_api, url_prefix='{}admin'.format(api_version))
   app.register_blueprint(group_api, url_prefix='{}group'.format(api_version))
+  app.register_blueprint(groups_api, url_prefix='{}groups'.format(api_version))
   app.register_blueprint(project_api, url_prefix='{}project'.format(api_version))
+  app.register_blueprint(stat_api, url_prefix='{}statistics'.format(api_version))
 
   @app.route('/', methods=['GET'])
   def index():

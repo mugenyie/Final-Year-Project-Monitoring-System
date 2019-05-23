@@ -15,3 +15,4 @@ from .ProjectLogModel import ProjectLogModel, ProjectLogSchema
 from .ProjectModel import ProjectModel, ProjectSchema
 from .StudentModel import StudentModel, StudentSchema
 from .SupervisorModel import SupervisorModel, SupervisorSchema
+from .AdminModel import AdminModel, AdminSchema

@@ -8,7 +8,9 @@ from ..services.AuthorizationService import Auth
 from ..apiviews import custom_response
 
 group_api = Blueprint('group_api', __name__)
+groups_api = Blueprint('groups_api', __name__)
 group_schema = GroupSchema()
+groups_schema = GroupSchema(many=True)
 
 @group_api.route('/', methods=['POST'])
 @cross_origin()
@@ -57,3 +59,36 @@ def view_group_members(group_id):
   users = StudentSchema().dump(users).data
   return custom_response(users, 200)
 
+@groups_api.route('/assigned', methods=['GET'])
+@Auth.auth_required
+def view_groups_assigned():
+  """
+  Get a assigned groups
+  """
+  groups = GroupModel.get_groups_assigned()
+  group_data =  groups_schema.dump(groups).data
+  return custom_response(group_data, 200)
+
+@groups_api.route('/unassigned', methods=['GET'])
+@Auth.auth_required
+def view_groups_unassigned():
+  """
+  Get a unassigned groups
+  """
+  groups = GroupModel.get_groups_unassigned()
+  group_data =  groups_schema.dump(groups).data
+  return custom_response(group_data, 200)
+
+@cross_origin()
+@groups_api.route('<string:group_id>/update', methods=['PATCH'])
+@Auth.auth_required
+def update_group(group_id):
+  """Update group"""
+  req_data = request.get_json()
+  data, error = group_schema.load(req_data, partial=True)
+  if error:
+      return custom_response(error, 400)
+  group = GroupModel.get_by_id(group_id)
+  group.update_group(data)
+  group_data =  group_schema.dump(group).data
+  return custom_response(group_data,200)

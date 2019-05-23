@@ -44,11 +44,25 @@ class GroupModel(BaseModel):
 
     @staticmethod
     def get_by_supervisor(supervisor_id):
-        return GroupModel.query.filter_by(supervisor_id=supervisor_id).order_by(GroupModel.created_at.desc())
-
+        return GroupModel.query.filter_by(supervisor_id=supervisor_id).order_by(GroupModel.created_on.desc())
+    
+    @staticmethod
+    def get_groups_assigned():
+        return GroupModel.query.filter(GroupModel.supervisor_id.isnot(None)).all()
+    
+    @staticmethod
+    def get_groups_unassigned():
+        return GroupModel.query.filter(GroupModel.supervisor_id == None).all()
+        
     @staticmethod
     def get_by_id(group_id):
         return GroupModel.query.get(group_id)  
+    
+    def update(self, data):
+        for key, item in data.items():
+            setattr(self, key, item)
+        self.modified_at = datetime.datetime.utcnow()
+        db.session.commit()
 
 class GroupSchema(Schema):
     id = fields.Str(missing=str(uuid.uuid4))

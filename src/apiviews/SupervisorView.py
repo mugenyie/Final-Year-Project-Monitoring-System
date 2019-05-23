@@ -51,25 +51,35 @@ def get_supervisor(pk):
     result = supervisor_schema.dump(supervisor).data
     return custom_response(result, 200)
 
+# @supervisor_api.route('/', methods=['GET'])
+# @Auth.auth_required
+# def view_all_supervisors():
+#   """
+#   Get all supervisors
+#   """
+#   supervisors = SupervisorModel.query.all()
+#   supervisor_data =  supervisors_schema.dump(supervisors).data
+#   return custom_response(supervisor_data, 200)
+
 @Auth.auth_required
 @supervisor_api.route('/<int:pk>/', methods=['DELETE'])
 def delete(pk):
-    supervisor = SupervisorModel.get(pk)
-    if supervisor is None:
-        return custom_response({"message":"User does not exist"}, 400)
-    supervisor.delete()
-    return custom_response({"message":"deleted {}".format(supervisor)}, 204)
+  supervisor = SupervisorModel.get(pk)
+  if supervisor is None:
+      return custom_response({"message":"User does not exist"}, 400)
+  supervisor.delete()
+  return custom_response({"message":"deleted {}".format(supervisor)}, 204)
 
 @Auth.auth_required
 @supervisor_api.route('/<int:pk>/', methods=['PUT'])
 def update(pk):
-    req_data = request.get_json()
-    data, error = supervisor_schema.load(req_data, partial=True)
-    if error:
-        return custom_response(error, 400)
-    supervisor = SupervisorModel.get(pk)
-    supervisor.update(data)
-    return custom_response(supervisor_schema.dump(supervisor),200)
+  req_data = request.get_json()
+  data, error = supervisor_schema.load(req_data, partial=True)
+  if error:
+      return custom_response(error, 400)
+  supervisor = SupervisorModel.get(pk)
+  supervisor.update(data)
+  return custom_response(supervisor_schema.dump(supervisor),200)
 
 @Auth.auth_required
 @supervisor_api.route('/login', methods=['POST'])
