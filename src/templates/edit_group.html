@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+<meta charset="utf-8">
+<title>Student Project Monitoring System</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
+<script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/group.js') }}"></script>
+<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+</head>
+<body onload="editGroup();availableSupervisors();">
+<div class="testing">
+<header class="main">
+<h1><strong>Student </strong> Project Monitoring System | Admin</h1>
+</header>
+<section class="user">
+<div class="profile-img">
+<p><img src="{{ url_for('static', filename='images/person.jpg') }}" alt="" height="40" width="40" /> Welcome back <span id="username"></span></p>
+</div>
+<div class="buttons">
+<button class="ico-font">&#59157;</button>
+<span class="button dropdown">
+<a href="#">Notifications <span class="pip">4</span></a>
+</span>
+<span class="button dropdown">
+<a href="#">Inbox <span class="pip">6</span></a>
+</span>
+<span class="button">Live</span>
+<span class="button">Help</span>
+<span class="button blue"><a href="javascript:logOut()">Logout</a></span>
+</div>
+</section>
+</div>
+
+<!-- navigations -->
+<nav>
+        <ul>
+        <li class="section"><a href="admin"><span class="icon">&#59176;</span> Dashboard</a></li>
+        <li>
+        <a href="#"><span class="icon">&#128196;</span>Groups</a>
+        <ul class="submenu">
+        <li><a href="groups_assigned">Assigned</a></li>
+        <li><a href="groups_unassigned">Unassigned</a></li>
+        </ul>
+        </li>
+        <li>
+        <a href="supervisors"><span class="icon">&#127748;</span>Supervisors </a>
+        </li>
+        <li>
+        <a href="students"><span class="icon">&#59160;</span> Students </a>
+        </li>
+        <!-- <li><a href="administrators.html"><span class="icon">&#128202;</span> Administrators</a></li> -->
+        
+        </li>
+        </ul>
+        </nav>
+        <!-- navigation -->
+
+<section class="content">
+
+        <section class="widget">
+            <div style="padding: 20px" id="group-detail">
+
+            </div>
+            <form onsubmit="UpdateGroupSupervisor()" style="padding: 20px">
+                    <select id="available-supervisors" name="Supervisor">
+                            
+                    </select>
+                    <button type="submit" class="green">Update Group Supervisor</button>
+            </form>
+        </section>
+
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
+
+</body>
+
+</html>

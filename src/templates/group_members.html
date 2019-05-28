@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+<meta charset="utf-8">
+<title>Student Project Monitoring System | Student</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
+<script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/group.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/members.js') }}"></script>
+<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+</head>
+<body onload="checkToken();GetUserGroup();GetGroupMembers();">
+<div class="testing">
+<header class="main">
+<h1><strong>Student </strong> Project Monitoring System | Student</h1>
+</header>
+<section class="user">
+<div class="profile-img">
+<p><img src="{{ url_for('static', filename='images/person.jpg') }}" alt="" height="40" width="40" /> Welcome back <span id="username"></span></p>
+</div>
+<div class="buttons">
+<button class="ico-font">&#59157;</button>
+<span class="button">
+<a href="create_project">Create / View Project <span class="pip">+/-</span></a>
+</span>
+<span class="button">
+<a href="create_group">Create / View / Edit Group <span class="pip">+/-</span></a>
+</span>
+<span class="button">
+<a href="group_members">Create / View / Edit Group Members <span class="pip">+/-</span></a>
+</span>
+<span class="button">Help</span>
+<span class="button blue"><a href="javascript:logOut()">Logout</a></span>
+</div>
+</section>
+</div>
+<!-- navigations -->
+<nav>
+<ul>
+<li class="section"><a href="student"><span class="icon">&#59176;</span> Dashboard</a></li>
+<li>
+<a href="#"><span class="icon">&#127748;</span>Submit Project Work</a>
+</li>
+<li>
+<a href="#"><span class="icon">&#127748;</span>Update Project Log</a>
+</li>
+</li>
+</ul>
+</nav>
+<!-- navigation -->
+
+<section class="content">
+        <section class="widget" style="height: 400px; min-height:300px">
+                <header>
+                <span class="icon">📄</span>
+                <hgroup>
+                    <h2>--</h2>
+                <h1>Members</h1>
+                </hgroup>
+
+                </header>
+                <div class="content">
+                <form id="create_group" onsubmit="AddMember()">
+                        <div class="field-wrap">
+                            Group name: <input readonly id="r-group_name" type="text">
+                        </div>
+                        <div class="field-wrap">
+                        Group Number: <input readonly id="r-group_number" type="text">
+                        </div>
+                        <h1 class="Pageheader">Members</h1>
+                        <table>
+                            <th></th><th>Name</th><th>Email</th><th>Phone</th><th>Student Number</th><th>Password</th>
+                            <div id="member-list"></div>
+                            <br /><br /><br />
+                            <tr>
+                                <td>New Member: &nbsp;</td>
+                                <td><input id="r-name" required type="text"></td>
+                                <td><input id="r-email" required type="email"></td>
+                                <td><input id="r-phonenumber" required type="tel"></td>
+                                <td><input id="r-student_number" required type="text"></td>
+                                <td><input id="r-password" required type="password"></td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="">Add Member</button>
+                </form>
+                </div>
+            </section>
+</section>
+<script>
+
+document.getElementById('r-group_name').value = getCookie('group_name');
+document.getElementById('r-group_number').value = getCookie('group_name');
+</script>
+
+</body>
+</html>

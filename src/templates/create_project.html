@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+<meta charset="utf-8">
+<title>Student Project Monitoring System | Student</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
+<script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/project.js') }}"></script>
+<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+</head>
+<body onload="checkToken();GetProject();">
+<div class="testing">
+<header class="main">
+<h1><strong>Student </strong> Project Monitoring System | Student</h1>
+</header>
+<section class="user">
+<div class="profile-img">
+<p><img src="{{ url_for('static', filename='images/person.jpg') }}" alt="" height="40" width="40" /> Welcome back <span id="username"></span></p>
+</div>
+<div class="buttons">
+<button class="ico-font">&#59157;</button>
+<span class="button">
+<a href="create_project">Create / View Project <span class="pip">+/-</span></a>
+</span>
+<span class="button">
+<a href="create_group">Create / View / Edit Group <span class="pip">+/-</span></a>
+</span>
+<span class="button">
+<a href="group_members">Create / View / Edit Group Members <span class="pip">+/-</span></a>
+</span>
+<span class="button">Help</span>
+<span class="button blue"><a href="javascript:logOut()">Logout</a></span>
+</div>
+</section>
+</div>
+<!-- navigations -->
+<nav>
+<ul>
+<li class="section"><a href="student"><span class="icon">&#59176;</span> Dashboard</a></li>
+<li>
+<a href="#"><span class="icon">&#127748;</span>Submit Project Work</a>
+</li>
+<li>
+<a href="#"><span class="icon">&#127748;</span>Update Project Log</a>
+</li>
+</li>
+</ul>
+</nav>
+<!-- navigation -->
+
+<section class="content">
+        <section class="widget" style="height: 400px; min-height:300px">
+                <header>
+                <span class="icon">📄</span>
+                <hgroup>
+                    <h2>--</h2>
+                <h1>Create / Update Project</h1>
+                </hgroup>
+
+                </header>
+                <div class="content">
+                <form id="create_project" onsubmit="CreateOrUpdateProject()" enctype="multipart/form-data">
+                        <div class="field-wrap">
+                            Project Name: <input required id="r-project_name" type="text">
+                        </div>
+                        <div class="field-wrap">
+                        Short description (200 Words): <textarea id="r-description" name="" id="" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="field-wrap">
+                            Proposal: <input required id="r-proposal_file" type="file">
+                        </div>
+                        <div class="field-wrap">
+                            Documentation: <input required id="r-documentation_file" type="file">
+                        </div>
+                        <div class="field-wrap">
+                            Git repository (link): <input required id="r-git_url" type="text">
+                        </div>
+                        <div class="field-wrap">
+                            Web Url (link): <input required id="r-web_url" type="text">
+                        </div>
+                        <button type="submit" class="">Create / Update Project</button>
+                </form>
+                </div>
+            </section>
+</section>
+
+</body>
+</html>

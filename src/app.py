@@ -1,7 +1,6 @@
 #src/app.py
 
-from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask import Flask, render_template
 from .config import app_config
 from .models import db, bcrypt
 from .apiviews.SupervisorView import supervisor_api
@@ -18,7 +17,6 @@ def create_app(env_name):
   
   # app initiliazation
   app = Flask(__name__)
-  cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
   
   app.config.from_object(app_config[env_name])
 
@@ -31,15 +29,73 @@ def create_app(env_name):
   app.register_blueprint(student_api, url_prefix='{}student'.format(api_version))
   app.register_blueprint(admin_api, url_prefix='{}admin'.format(api_version))
   app.register_blueprint(group_api, url_prefix='{}group'.format(api_version))
-  app.register_blueprint(groups_api, url_prefix='{}groups'.format(api_version))
+  app.register_blueprint(groups_api)
   app.register_blueprint(project_api, url_prefix='{}project'.format(api_version))
   app.register_blueprint(stat_api, url_prefix='{}statistics'.format(api_version))
 
   @app.route('/', methods=['GET'])
   def index():
-    """
-    initial endpoint
-    """
-    return 'Hello world! this is the future home of FYPMS'
+    return render_template('index.html')
+
+  @app.route('/student', methods=['GET'])
+  def student():
+    return render_template('student_.html')
+
+  @app.route('/admin', methods=['GET'])
+  def admin():
+    return render_template('admin_.html')
+
+  @app.route('/supervisor', methods=['GET'])
+  def supervisor():
+    return render_template('supervisor_.html')
+
+  @app.route('/create_project', methods=['GET'])
+  def create_project():
+    return render_template('create_project.html')
+
+  @app.route('/create_group', methods=['GET'])
+  def create_group():
+    return render_template('create_group.html')
+
+  @app.route('/group_members', methods=['GET'])
+  def group_members():
+    return render_template('group_members.html')
+
+  @app.route('/groups_assigned', methods=['GET'])
+  def groups_assigned():
+    return render_template('groups_assigned.html')
+
+  @app.route('/groups_unassigned', methods=['GET'])
+  def groups_unassigned():
+    return render_template('groups_unassigned.html')
+
+  @app.route('/edit_group', methods=['GET'])
+  def edit_group():
+    return render_template('edit_group.html')
+
+  @app.route('/supervisors', methods=['GET'])
+  def supervisors():
+    return render_template('supervisors.html')
+
+  @app.route('/students', methods=['GET'])
+  def students():
+    return render_template('students.html')
+
+  @app.route('/select', methods=['GET'])
+  def select():
+    return render_template('select.html')
+
+  @app.route('/new-student', methods=['GET'])
+  def new_student():
+    return render_template('new-student.html')
+
+  @app.route('/new-admin', methods=['GET'])
+  def new_admin():
+    return render_template('new-admin.html')
+
+  @app.route('/new-supervisor', methods=['GET'])
+  def new_supervisor():
+    return render_template('new-supervisor.html')
+
   
   return app

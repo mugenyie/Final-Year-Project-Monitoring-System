@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+<meta charset="utf-8">
+<title>Student Project Monitoring System | Supervisor</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
+<script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/supervisor.js') }}"></script>
+<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+</head>
+<body onload="checkToken();displayAssignedGroups();">
+<div class="testing">
+<header class="main">
+<h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
+</header>
+<section class="user">
+<div class="profile-img">
+<p><img src="{{ url_for('static', filename='images/person.jpg') }}" alt="" height="40" width="40" /> Welcome back <span id="username"></span></p>
+</div>
+<div class="buttons">
+<button class="ico-font">&#59157;</button>
+<span class="button dropdown">
+<a href="#">Notifications <span class="pip">4</span></a>
+</span>
+<span class="button dropdown">
+<a href="#">Inbox <span class="pip">6</span></a>
+</span>
+<span class="button">Live</span>
+<span class="button">Help</span>
+<span class="button blue"><a href="javascript:logOut()">Logout</a></span>
+</div>
+</section>
+</div>
+<!-- navigations -->
+<nav>
+<ul>
+<li class="section"><a href="supervisor"><span class="icon">&#59176;</span> Dashboard</a></li>
+<li>
+<a href="#"><span class="icon">&#128196;</span>Groups</a>
+</li>
+</ul>
+</nav>
+<!-- navigation -->
+
+<section class="content">
+
+        <section class="widget">
+                <header>
+                <span class="icon">📄</span>
+                <hgroup>
+                <h1>Groups Assigned</h1>
+                <h2>(10)</h2>
+                </hgroup>
+                
+                </header>
+                <div class="content">
+                <table id="myTable" border="0" width="100">
+                <thead>
+                <tr>
+                <th>Page title</th>
+                <th>Date</th>
+                <th>Child pages</th>
+                <th>Comments</th>
+                <th>Author</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td><input type="checkbox"> Home</td>
+                <td>01/3/2013</td>
+                <td>0</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> Services</td>
+                <td>01/3/2013</td>
+                <td>4</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> Portfolio</td>
+                <td>02/3/2013</td>
+                <td>12</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> About us</td>
+                <td>02/3/2013</td>
+                <td>2</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> Blog</td>
+                <td>02/3/2013</td>
+                <td>32</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> Contact us</td>
+                <td>03/3/2013</td>
+                <td>0</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> Our clients</td>
+                <td>04/3/2013</td>
+                <td>1</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox"> Partnerships</td>
+                <td>04/3/2013</td>
+                <td>0</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                <tr>
+                <td><input type="checkbox">Jobs</td>
+                <td>04/3/2013</td>
+                <td>0</td>
+                <td>0</td>
+                <td>John Doe</td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+                </section>
+
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="js/jquery.wysiwyg.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/cycle.js"></script>
+<script src="js/jquery.checkbox.min.js"></script>
+<script src="js/flot.js"></script>
+<script src="js/flot.resize.js"></script>
+<script src="js/flot-time.js"></script>
+<script src="js/flot-pie.js"></script>
+<script src="js/flot-graphs.js"></script>
+<script src="js/cycle.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+// Feature slider for graphs
+$('.cycle').cycle({
+	fx: "scrollHorz",
+	timeout: 0,
+    slideResize: 0,
+    prev:    '.left-btn', 
+    next:    '.right-btn'
+});
+</script>
+</body>
+
+<!-- Mirrored from www.klevermedia.co.uk/assets/dashboard/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 11:54:37 GMT -->
+</html>

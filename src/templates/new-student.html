@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+<meta charset="utf-8">
+<title>Student Project Monitoring System</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
+<script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/auth.js') }}"></script>
+<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+<!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+</head>
+<body class="login">
+	<style>
+		select{
+	padding: 10px;
+    font-size: 12px;
+    font-family: Arial;
+    color: #606060;
+    border: 1px solid #e3e3e3;
+    background: #fff;
+    width: 100%;
+    margin: 0 0 15px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+label{
+    text-align: left !important;
+    color: #fff;
+}
+		</style>
+<section>
+<h1>Register New Student</h1>
+<form id="PostStudentData" onsubmit="SignUpStudent()">
+        <input id="r-name" type="text" value="Full Name" />
+        <input id="r-email" type="email" value="Email" />
+        <input id="r-phonenumber" type="text" value="+256000000000" />
+        <input id="r-course" type="text" value="Course" />
+        <input id="r-student_number" type="text" value="Student Number" />
+        <label for="">Password</label>
+        <input id="r-password" value="Password" type="password" />
+        <label for="">Confirm Password</label>
+        <input value="Confirm Password" type="password" />
+        <button type="submit" class="green">Register</button>
+</form>
+<p><a href="select">Register new (Student, Admin or Supervisor)</a></p>
+<p><a href="/">Sign In</a></p>
+<p><a href=""><a href="#">Forgot your password?</a></a></p>
+</section>
+
+</body>
+
+</html>
