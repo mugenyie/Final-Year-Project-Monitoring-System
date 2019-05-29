@@ -98,6 +98,6 @@ def update_group(group_id):
   if error:
       return custom_response(error, 400)
   group = GroupModel.get_by_id(group_id)
-  group.update_group(data)
+  group.update(data)
   group_data =  group_schema.dump(group).data
-  return custom_response(204)
+  return custom_response(group_data, 200)

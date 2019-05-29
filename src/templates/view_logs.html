@@ -10,12 +10,12 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
 <script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
-<script src="{{ url_for('static', filename='operations_js/student.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/project_log.js') }}"></script>
 <!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();getStudentDetails();">
+<body onload="checkToken();displayStudentLogs();">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Student</h1>
@@ -48,19 +48,31 @@
 <a href="#"><span class="icon">&#127748;</span>Submit Project Work</a>
 </li> -->
 <li>
-    <a href="project_log"><span class="icon">&#127748;</span>Add to Project Log</a>
-    </li>
-    <li>
-    <a href="view_logs"><span class="icon">&#127748;</span>View Logs</a>
-    </li>
+<a href="project_log"><span class="icon">&#127748;</span>Add to Project Log</a>
+</li>
+<li>
+<a href="view_logs"><span class="icon">&#127748;</span>View Logs</a>
+</li>
 </li>
 </ul>
 </nav>
 <!-- navigation -->
 
 <section class="content">
-    <h1 class="Pageheader">Student Details</h1>
-    <div id="userDetails"></div>
+    <table id="myTable" border="0" width="100">
+        <thead>
+        <tr> 
+        <th>Date Create</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Score</th>
+        </tr>
+        </thead>
+        <tbody id="log_list">
+
+
+        </tbody>
+        </table>
 </section>
 
 </body>

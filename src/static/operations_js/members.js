@@ -28,7 +28,6 @@ function AddMember(){
     let student_number = document.getElementById('r-student_number').value;
     fetch(baseurl+'student/', {
         method: 'POST',
-        mode:"no-cors",
         headers : {
             'Content-Type': 'application/json',
             'api-token': getCookie('auth_token')
@@ -41,7 +40,8 @@ function AddMember(){
             password:password,
             phonenumber:phonenumber,
             student_number:student_number,
-            group_id:group_id
+            group_id:group_id,
+            created_by:getCookie('id')
         })
     });   
 }
@@ -50,17 +50,17 @@ function AddStudent(){
     event.preventDefault();
 
     console.log("Adding new student");
-
-    createStudent(
-        create_UUID(),
-        document.getElementById('r-name').value,
-        document.getElementById('r-email').value,
-        document.getElementById('r-phonenumber').value,
-        document.getElementById('r-student_number').value,
-        document.getElementById('r-password').value,
-        getCookie('course'),
-        getCookie('group_id')
-    );
+    AddMember();
+    // createStudent(
+    //     create_UUID(),
+    //     document.getElementById('r-name').value,
+    //     document.getElementById('r-email').value,
+    //     document.getElementById('r-phonenumber').value,
+    //     document.getElementById('r-student_number').value,
+    //     document.getElementById('r-password').value,
+    //     getCookie('course'),
+    //     getCookie('group_id')
+    // );
 }
 
 function GetGroupMembers(){

@@ -24,13 +24,78 @@ function displaySupervisors(){
     .catch(error => console.error(error));  
 }
 
-let group_list = '';
+let assigned_list = "";
+let group_count_assigned = 0;
 function displayAssignedGroups(){
-    var groupsData = httpGet(baseurl+'groups/'+getCookie('id')+'/assigned');
-
-        console.log(groupsData);
-
-        groupsData.forEach(element => {
-            group_list += ``;
+    GetData(baseurl+`groups/${getCookie('id')}/assigned`)
+    .then(data => {
+        console.log(JSON.stringify(data));
+        data.forEach(element => {
+            group_count_assigned+=1;
+            assigned_list += `
+            <tr onclick="window.location.href='view_group?group_id=${element.id}'">
+            <td>${element.name}</td>
+            <td>${element.number}</td>
+            <td>${element.project_id}</td>
+            <td>${element.supervisor_id}</td>
+            <td>${element.created_on}</td>
+            </tr>
+            `;
         });
+        
+        document.getElementById('group-list').innerHTML = assigned_list;
+        document.getElementById('group-count').textContent = group_count_assigned;
+    })
+    .catch(error => console.error(error));  
+}
+
+function GetGroupProject(group_id){
+    GetData(baseurl+`project/${group_id}/project`)
+    .then(data => {
+        console.log(JSON.stringify(data));
+        document.getElementById('r-project_name').value = data.name;
+        document.getElementById('project_id').value = data.id;
+        document.getElementById('r-git_url').value = data.git_url;
+        document.getElementById('r-web_url').value = data.web_url;
+        document.getElementById('r-proposal_file').value = data.proposal_file;
+        document.getElementById('r-documentation_file').value = data.documentation_file;
+        document.getElementById('r-description').value = data.description;
+    })
+    .catch(error => console.error(error));
+}
+
+function ScoreProject(){
+    event.preventDefault();
+    var project_id = document.getElementById('project_id').value;
+    var score = document.getElementById('r-score').value;
+
+    UpdateData(baseurl+`project/${project_id}`, {score:score})
+    .then(data => {console.log(data)})
+    .catch(error => console.error(error));  
+}
+{/* <th>Title</th>
+                <th>Description</th>
+                <th>StudentId</th>
+                <th>Score</th>
+                <th>Created On</th> */}
+var group_log = "";
+function GetGroupLog(group_id){
+    GetData(baseurl+`projectlog/${group_id}/group`)
+    .then(data => {
+        console.log(JSON.stringify(data));
+        data.forEach(element => {
+            group_count_assigned+=1;
+            group_log += `
+            <tr onclick="window.location.href='view_group?group_id=${element.id}'">
+            <td>${element.name}</td>
+            <td>${element.number}</td>
+            <td>${element.project_id}</td>
+            <td>${element.supervisor_id}</td>
+            <td>${element.created_on}</td>
+            </tr>
+            `;
+        });
+        document.getElementById('group_log').innerHTML = group_log;
+    })
+    .catch(error => console.error(error));
 }

@@ -62,7 +62,7 @@ def get_a_user(user_id):
   student_data = student_schema.dump(student).data
   return custom_response(student_data, 200)
 
-@student_api.route('/me', methods=['PUT'])
+@student_api.route('/me', methods=['PATCH'])
 @Auth.auth_required
 def update():
     """

@@ -15,7 +15,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();displayAssignedGroups();">
+<body onload="checkToken();GetGroupProject(getAllUrlParams().group_id)">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -51,38 +51,37 @@
 
 <section class="content">
 
-    <section class="widget">
-        <header>
-        <span class="icon">📄</span>
-        <hgroup>
-        <h1>Groups Assigned</h1>
-        <h2>(<span id="group-count"></span>)</h2>
-        </hgroup>
-        
-        </header>
-        <div class="content">
-        <table id="myTable" border="0" width="100">
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th>Number</th>
-        <th>Project Id</th>
-        <th>Supervisor Id</th>
-        <th>Created On</th>
-        </tr>
-        </thead>
-        <tbody id="group-list">
-
-
-        </tbody>
-        </table>
-        </div>
-    </section>
+            <form onsubmit="ScoreProject()">
+                <div class="field-wrap">
+                    Project Name: <input readonly id="r-project_name" type="text">
+                </div>
+                <div class="field-wrap">
+                Short description (200 Words): <textarea readonly id="r-description" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="field-wrap">
+                    Link to Proposal: <input readonly id="r-proposal_file" type="text">
+                </div>
+                <div class="field-wrap">
+                    Link to Documentation: <input readonly id="r-documentation_file" type="text">
+                </div>
+                <div class="field-wrap">
+                    Git repository (link): <input readonly id="r-git_url" type="text">
+                </div>
+                <div class="field-wrap">
+                    Web Url (link): <input readonly id="r-web_url" type="text">
+                </div>
+                <div class="field-wrap">
+                    Add Score (%): <input required id="r-score" type="number">
+                </div>
+                <input id="project_id" type="hidden">
+                <button type="submit" class="">Create / Update Project</button>
+        </form>
 
 </section>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script> -->
 </body>
 
 </html>

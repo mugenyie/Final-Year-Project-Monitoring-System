@@ -11,12 +11,14 @@ class ProjectLogModel(BaseModel):
 
     title = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(128), nullable=False)
-    supervisor_remarks = db.Column(db.String(128), nullable=False)
+    supervisor_remarks = db.Column(db.String(128), nullable=True)
     files = db.Column(db.String(128), nullable=True)
     score = db.Column(db.Integer, nullable=False, default=0)
     source_link = db.Column(db.String(128), nullable=True)
     student_id = db.Column(db.String, db.ForeignKey('students.id'), nullable=False)
-    project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=False)
+    project_id = db.Column(db.String(128), nullable=True)
+    group_id = db.Column(db.String, db.ForeignKey('groups.id'), nullable=True)
+    supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
     # class constructor
     def __init__(self, data):
@@ -29,6 +31,8 @@ class ProjectLogModel(BaseModel):
         self.source_link = data.get('source_link')
         self.project_id = data.get('project_id')
         self.student_id = data.get('student_id')
+        self.group_id = data.get('group_id')
+        self.supervisor_id = data.get('supervisor_id')
 
     def __str__(self):
         return "<id: {}>".format(self.id)
@@ -38,7 +42,7 @@ class ProjectLogModel(BaseModel):
         db.session.add(self)
         db.session.commit()
 
-    def update():
+    def update(self,data):
         for key, item in data.items():
             setattr(self, key, item)
         self.modified_at = datetime.datetime.utcnow()
@@ -46,7 +50,11 @@ class ProjectLogModel(BaseModel):
 
     @staticmethod
     def get_by_student(student_id):
-        return ProjectLogModel.query.filter_by(student_id=student_id).order_by(ProjectLogModel.created_at.desc())
+        return ProjectLogModel.query.filter_by(student_id=student_id).order_by(ProjectLogModel.created_on.desc())
+    
+    @staticmethod
+    def get_by_groupid(group_id):
+        return ProjectLogModel.query.filter_by(group_id=group_id).order_by(ProjectLogModel.created_on.desc())
 
 
 class ProjectLogSchema(Schema):
@@ -57,8 +65,10 @@ class ProjectLogSchema(Schema):
     score = fields.Int(required=False)
     supervisor_remarks = fields.Str(required=False)
     source_link = fields.Str(required=False)
-    student_id = fields.Int(required=False)
-    project_id = fields.Int(required=False)
+    student_id = fields.Str(required=False)
+    project_id = fields.Str(required=False)
+    group_id = fields.Str(required=False)
+    supervisor_id = fields.Str(required=False)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)
 

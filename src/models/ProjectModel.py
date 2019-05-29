@@ -17,6 +17,7 @@ class ProjectModel(BaseModel):
     proposal_file = db.Column(db.String(128), nullable=True)
     documentation_file = db.Column(db.String(128), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
+    group_id = db.Column(db.String, db.ForeignKey('groups.id'), nullable=True)
     created_by = db.Column(db.String(128), nullable=False)
 
     # class constructor
@@ -32,6 +33,7 @@ class ProjectModel(BaseModel):
         self.created_by = data.get('created_by')
         self.description = data.get('description')
         self.supervisor_id = data.get('supervisor_id')
+        self.group_id = data.get('group_id')
 
     def __str__(self):
         return "<id: {}>".format(self.id)
@@ -40,7 +42,7 @@ class ProjectModel(BaseModel):
         db.session.add(self)
         db.session.commit()
 
-    def update(self):
+    def update(self, data):
         for key, item in data.items():
             setattr(self, key, item)
         self.modified_at = datetime.datetime.utcnow()
@@ -56,11 +58,15 @@ class ProjectModel(BaseModel):
 
     @staticmethod
     def get_by_supervisor(supervisor_id):
-        return ProjectModel.query.filter_by(supervisor_id=supervisor_id).order_by(ProjectModel.created_at.desc())
+        return ProjectModel.query.filter_by(supervisor_id=supervisor_id).order_by(ProjectModel.created_on.desc())
     
     @staticmethod
     def get_by_createdby(student_id):
-        return ProjectModel.query.filter_by(created_by=student_id).order_by(ProjectModel.created_at.desc())
+        return ProjectModel.query.filter_by(created_by=student_id).first()
+
+    @staticmethod
+    def get_by_groupid(group_id):
+        return ProjectModel.query.filter_by(group_id=group_id).first()
 
 
 class ProjectSchema(Schema):
@@ -73,6 +79,7 @@ class ProjectSchema(Schema):
     documentation_file = fields.Str(required=False)
     created_by = fields.Str(required=True)
     description = fields.Str(required=True)
-    supervisor_id = fields.Int(required=False)
+    supervisor_id = fields.Str(required=False)
+    group_id = fields.Str(required=False)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)

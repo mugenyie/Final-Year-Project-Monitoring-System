@@ -15,6 +15,7 @@ class StudentModel(UserModel, BaseModel):
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
     group_id = db.Column(db.String, db.ForeignKey('groups.id'), nullable=True)
     project_id = db.Column(db.String, db.ForeignKey('projects.id'), nullable=True)
+    created_by = db.Column(db.String(128), nullable=True)
 
     # class constructor
     def __init__(self, data):
@@ -31,6 +32,7 @@ class StudentModel(UserModel, BaseModel):
         self.supervisor_id = data.get('supervisor_id')
         self.group_id = data.get('group_id')
         self.project_id = data.get('project_id')
+        self.created_by = data.get('created_by')
 
     #CRUD Operations
     def save(self):
@@ -84,9 +86,10 @@ class StudentSchema(Schema):
     user_role_value = fields.Int()
     user_role_name = fields.Str()
     modified_at = fields.DateTime(dump_only=True)
-    supervisor_id = fields.Int(required=False)
+    supervisor_id = fields.Str(required=False)
     group_id = fields.Str(required=False)
-    project_id = fields.Int(required=False)
+    project_id = fields.Str(required=False)
+    created_by = fields.Str(required=False)
 
 
     

@@ -27,7 +27,7 @@ def create():
   project_data = project_schema.dump(project).data
   return custom_response(project_data, 201)
 
-@project_api.route('/<string:project_id>', methods=['PUT'])
+@project_api.route('/<string:project_id>', methods=['PATCH'])
 def update(project_id):
   """Update Project"""
   req_data = request.get_json()
@@ -70,5 +70,12 @@ def get_by_supervisor():
 def get_by_created_by(created_by):
   """Get project by who created it"""
   project = ProjectModel.get_by_createdby(created_by)
+  project_data = project_schema.dump(project).data
+  return custom_response(project_data, 200)
+
+@project_api.route('/<string:group_id>/project', methods=['GET'])
+def get_by_group_id(group_id):
+  """Get project by group id"""
+  project = ProjectModel.get_by_groupid(group_id) 
   project_data = project_schema.dump(project).data
   return custom_response(project_data, 200)

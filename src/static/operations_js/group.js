@@ -5,6 +5,9 @@ function GetUserGroup(){
         setCookie('group_id', data.id, 30);
         setCookie('group_name', data.name, 30);
         setCookie('group_number', data.number, 30);
+
+        document.getElementById('r-group_name').value = data.name;
+        document.getElementById('r-group_number').value = data.number;
     })
     .catch(error => console.error(error));  
 }
@@ -33,7 +36,7 @@ function createNewGroup(id,name, number){
 
 function updateMyGroupId(group_id){
     UpdateData(baseurl+'student/me', {
-        group_id:id
+        group_id:group_id
     })
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.error(error)); 
@@ -127,11 +130,8 @@ function UpdateGroupSupervisor(){
     let group_id = window.location.search.substr(1).slice(3)
     let supervisor_id = document.getElementById('available-supervisors').value;
 
-//     var x =UpdateData(baseurl+`groups/${group_id}/update`, JSON.stringify({supervisor_id:supervisor_id}))
-// console.log(x);
     fetch(baseurl+`groups/${group_id}/update`,{
         method: 'PATCH',
-        mode: 'cors',
         headers: {
             'api-token': getCookie('auth_token')
         },

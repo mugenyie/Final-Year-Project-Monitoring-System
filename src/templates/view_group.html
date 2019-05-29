@@ -15,7 +15,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();displayAssignedGroups();">
+<body onload="checkToken();">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -52,37 +52,23 @@
 <section class="content">
 
     <section class="widget">
-        <header>
-        <span class="icon">📄</span>
-        <hgroup>
-        <h1>Groups Assigned</h1>
-        <h2>(<span id="group-count"></span>)</h2>
-        </hgroup>
-        
-        </header>
-        <div class="content">
-        <table id="myTable" border="0" width="100">
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th>Number</th>
-        <th>Project Id</th>
-        <th>Supervisor Id</th>
-        <th>Created On</th>
-        </tr>
-        </thead>
-        <tbody id="group-list">
-
-
-        </tbody>
-        </table>
-        </div>
+        <button id="award_project">View & Score Project</button>
+        <button id="group_log">View & Score Project Log</button>
+        <button id="supervisor_message">Send Group Message</button>
+        <button id="report">View Group Performance (Report)</button>
     </section>
 
 </section>
+<script>
+    var group_id = getAllUrlParams().group_id;
+    document.getElementById("award_project").onclick = function() {location.href=`award_project?group_id=${group_id}`;}
+    document.getElementById("group_log").onclick = function() {location.href=`group_log?group_id=${group_id}`;}
+    document.getElementById("supervisor_message").onclick = function() {location.href=`supervisor_message?group_id=${group_id}`;}
+    document.getElementById("report").onclick = function() {location.href=`report?group_id=${group_id}`;}
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script> -->
 </body>
 
 </html>

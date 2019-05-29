@@ -1,8 +1,6 @@
 function CreateOrUpdateProject(){
     event.preventDefault();
-    var project = GetProject(getCookie('project_id'));
-    console.log(project);
-    if(project == null){
+    if(getCookie('project_id') == 'null' || getCookie('project_id') == 'undefined'){
         CreateProject(
             document.getElementById('r-project_name').value,
             document.getElementById('r-git_url').value,
@@ -25,31 +23,30 @@ function CreateOrUpdateProject(){
 
 function CreateProject(name,git,web,proposal,documentation,description){ 
     let id = create_UUID();
-    fetch(baseurl+'project/', {
-        method: 'POST',
-        mode:"no-cors",
-        headers : {
-            'Content-Type': 'application/json',
-            'api-token': getCookie('auth_token')
-        },
-        body:JSON.stringify({
-            id:id,
-            name:name,
-            git_url:git, 
-            web_url:web,
-            proposal_file:proposal,
-            documentation_file:documentation,
-            description:description,
-            created_by:getCookie('id')
-        })
-    }); 
-    setCookie('project_id')=id;
+    PostData(baseurl+'project/',{
+        id:id,
+        name:name,
+        git_url:git, 
+        web_url:web,
+        proposal_file:proposal,
+        documentation_file:documentation,
+        description:description,
+        created_by:getCookie('id'),
+        group_id:getCookie('group_id')
+    })
+    .then(data => {
+        console.log(data);
+        updateGroupProjectId(data.id);
+        setCookie('project_id', data.id);
+    })
+    .catch(error => console.error(error));  
 }
 
 function GetProject(){
     if(getCookie('project_id') != 'null'){
         GetData(baseurl+'project/'+getCookie('project_id'))
         .then(data => {
+            console.log(data)
             document.getElementById('r-project_name').value = data.name;
             document.getElementById('r-git_url').value = data.git_url;
             document.getElementById('r-web_url').value = data.web_url;
@@ -61,15 +58,24 @@ function GetProject(){
     }
 }
 
-function UpdateProject(){
-    UpdateData(baseurl+'project/', {
+function UpdateProject(name,git,web,proposal,documentation,description){
+    UpdateData(baseurl+'project/'+getCookie('project_id'), {
         name:name,
         git_url:git, 
         web_url:web,
         proposal_file:proposal,
         documentation_file:documentation,
-        description:description
+        description:description,
+        group_id:getCookie('group_id')
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error(error));  
+}
+
+function updateGroupProjectId(project_id){
+    UpdateData(baseurl+`groups/${getCookie('group_id')}/update`, {
+        project_id:project_id
     })
     .then(data => console.log(JSON.stringify(data)))
-    .catch(error => console.error(error));  
+    .catch(error => console.error(error)); 
 }

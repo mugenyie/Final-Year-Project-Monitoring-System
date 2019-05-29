@@ -9,6 +9,7 @@ function getStudentDetails(){
             <p>Phone: ${getCookie('phonenumber')}</p>
             <p>Student Number: ${getCookie('student_number')}</p>
             <p>Group ID: ${getCookie('group_id')}</p>
+            <p>Project ID: ${getCookie('project_id')}</p>
         `;
 
     var div = document.getElementById('userDetails');

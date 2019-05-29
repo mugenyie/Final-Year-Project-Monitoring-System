@@ -15,7 +15,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();displayAssignedGroups();">
+<body onload="checkToken();GetGroupLog(getAllUrlParams().group_id)">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -51,38 +51,39 @@
 
 <section class="content">
 
-    <section class="widget">
-        <header>
-        <span class="icon">📄</span>
-        <hgroup>
-        <h1>Groups Assigned</h1>
-        <h2>(<span id="group-count"></span>)</h2>
-        </hgroup>
+        <section class="widget">
+                <header>
+                <span class="icon">📄</span>
+                <hgroup>
+                <h1>Group Log</h1>
+                <h2></h2>
+                </hgroup>
+                
+                </header>
+                <div class="content">
+                <table id="myTable" border="0" width="100">
+                <thead>
+                <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>StudentId</th>
+                <th>Score</th>
+                <th>Created On</th>
+                </tr>
+                </thead>
+                <tbody id="group_log">
         
-        </header>
-        <div class="content">
-        <table id="myTable" border="0" width="100">
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th>Number</th>
-        <th>Project Id</th>
-        <th>Supervisor Id</th>
-        <th>Created On</th>
-        </tr>
-        </thead>
-        <tbody id="group-list">
-
-
-        </tbody>
-        </table>
-        </div>
-    </section>
+        
+                </tbody>
+                </table>
+                </div>
+            </section>
 
 </section>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script> -->
 </body>
 
 </html>

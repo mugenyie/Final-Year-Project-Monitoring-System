@@ -9,6 +9,7 @@ from .apiviews.AdminView import admin_api
 from .apiviews.GroupView import group_api, groups_api
 from .apiviews.ProjectView import project_api
 from .apiviews.StatView import stat_api
+from .apiviews.ProjectLogView import log_api
 
 def create_app(env_name):
   """
@@ -31,6 +32,7 @@ def create_app(env_name):
   app.register_blueprint(group_api, url_prefix='{}group'.format(api_version))
   app.register_blueprint(groups_api)
   app.register_blueprint(project_api, url_prefix='{}project'.format(api_version))
+  app.register_blueprint(log_api, url_prefix='{}projectlog'.format(api_version))
   app.register_blueprint(stat_api, url_prefix='{}statistics'.format(api_version))
 
   @app.route('/', methods=['GET'])
@@ -96,6 +98,30 @@ def create_app(env_name):
   @app.route('/new-supervisor', methods=['GET'])
   def new_supervisor():
     return render_template('new-supervisor.html')
+
+  @app.route('/project_log', methods=['GET'])
+  def project_log():
+    return render_template('project_log.html')
+
+  @app.route('/view_logs', methods=['GET'])
+  def view_logs():
+    return render_template('view_logs.html')
+
+  @app.route('/view_group', methods=['GET'])
+  def view_group():
+    return render_template('view_group.html')
+
+  @app.route('/award_project', methods=['GET'])
+  def award_project():
+    return render_template('award_project.html')
+
+  @app.route('/group_log', methods=['GET'])
+  def group_log():
+    return render_template('group_log.html')
+
+  @app.route('/supervisor_message', methods=['GET'])
+  def supervisor_message():
+    return render_template('supervisor_message.html')
 
   
   return app
