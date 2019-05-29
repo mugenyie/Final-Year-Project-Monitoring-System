@@ -51,6 +51,8 @@ function AddStudent(){
 
     console.log("Adding new student");
     AddMember();
+        alert("Successfuly Added Member");
+
     // createStudent(
     //     create_UUID(),
     //     document.getElementById('r-name').value,

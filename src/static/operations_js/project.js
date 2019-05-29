@@ -36,6 +36,9 @@ function CreateProject(name,git,web,proposal,documentation,description){
     })
     .then(data => {
         console.log(data);
+        if(data.created_by != 'null'){
+            alert("Successfuly Created Project");
+        }
         updateGroupProjectId(data.id);
         setCookie('project_id', data.id);
     })
@@ -68,7 +71,12 @@ function UpdateProject(name,git,web,proposal,documentation,description){
         description:description,
         group_id:getCookie('group_id')
     })
-    .then(data => console.log(data))
+    .then(data => {
+        console.log(data);
+        if(data.created_by != 'null'){
+            alert("Successfuly Updated Project");
+        }
+    })
     .catch(error => console.error(error));  
 }
 

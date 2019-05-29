@@ -28,6 +28,9 @@ function createNewGroup(id,name, number){
     })
     .then(data => {
         console.log(JSON.stringify(data));
+        if(data.id != 'null'){
+            alert("Successfuly Created Group");
+        }
         updateMyGroupId(data.id);
         setCookie('group_id', data.id, 30);
     })

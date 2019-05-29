@@ -19,6 +19,9 @@ function CreateLog(){
     })
     .then(data => {
         console.log(data);
+        if(data.created_by != 'null'){
+            alert("Successfuly Added Log");
+        }
     })
     .catch(error => console.error(error));  
 }

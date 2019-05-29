@@ -62,7 +62,7 @@ class ProjectLogModel(BaseModel):
 
 
 class ProjectLogSchema(Schema):
-    id = fields.Str(missing=str(uuid.uuid4))
+    id = fields.Str(required=True)
     title = fields.Str(required=True)
     description = fields.Str(required=True)
     files = fields.Str(required=False)
