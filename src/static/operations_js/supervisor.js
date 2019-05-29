@@ -86,7 +86,7 @@ function GetGroupLog(group_id){
         data.forEach(element => {
             group_count_assigned+=1;
             group_log += `
-            <tr onclick="window.location.href='view_group?group_id=${element.id}'">
+            <tr onclick="window.location.href='score_log?log_id=${element.id}'">
             <td>${element.name}</td>
             <td>${element.number}</td>
             <td>${element.project_id}</td>
@@ -96,6 +96,19 @@ function GetGroupLog(group_id){
             `;
         });
         document.getElementById('group_log').innerHTML = group_log;
+    })
+    .catch(error => console.error(error));
+}
+
+function GetLogInfo(log_id){
+    GetData(baseurl+`projectlog/${log_id}`)
+    .then(data => {
+        console.log(JSON.stringify(data));
+        document.getElementById('r-title').value = data.name;
+        document.getElementById('r-description').value = data.id;
+        document.getElementById('r-files').value = data.git_url;
+        document.getElementById('r-source').value = data.web_url;
+        document.getElementById('r-score').value = data.proposal_file;
     })
     .catch(error => console.error(error));
 }

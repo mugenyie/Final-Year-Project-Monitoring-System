@@ -15,7 +15,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();displayAssignedGroups();">
+<body onload="checkToken();GetLogInfo(getAllUrlParams().log_id)">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -50,23 +50,32 @@
 <!-- navigation -->
 
 <section class="content">
-<h1 style="font-size:26px">Send Message to Group</h1>
-<br />
-        <form id="supervisor_mesage" onsubmit="SendMessage()" enctype="multipart/form-data">
-            <div class="field-wrap">
-                Title: <input required id="r-title" type="text">
-            </div>
-            <div class="field-wrap">
-            message: <textarea id="r-message" name="" id="" cols="30" rows="10"></textarea>
-            </div>
-            
-            <button type="submit" class="">Send Message</button>
-    </form>
+
+            <form onsubmit="ScoreLog()">
+                <div class="field-wrap">
+                    Title: <input readonly id="r-title" type="text">
+                </div>
+                <div class="field-wrap">
+                Description: <textarea readonly id="r-description" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="field-wrap">
+                    Link to necessary files: <input readonly id="r-files" type="text">
+                </div>
+                <div class="field-wrap">
+                    Repository Link: <input readonly id="r-source" type="text">
+                </div>
+                <div class="field-wrap">
+                   Score Project Log (%): <input required id="r-score" type="number">
+                </div>
+                <input id="project_id" type="hidden">
+                <button type="submit" class="">Create / Update Project</button>
+        </form>
 
 </section>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script> -->
 </body>
 
 </html>

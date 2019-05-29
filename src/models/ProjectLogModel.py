@@ -51,6 +51,10 @@ class ProjectLogModel(BaseModel):
     @staticmethod
     def get_by_student(student_id):
         return ProjectLogModel.query.filter_by(student_id=student_id).order_by(ProjectLogModel.created_on.desc())
+
+    @staticmethod
+    def get(log_id):
+        return ProjectLogModel.query.filter_by(id=log_id).order_by(ProjectLogModel.created_on.desc())
     
     @staticmethod
     def get_by_groupid(group_id):

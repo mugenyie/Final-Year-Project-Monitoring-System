@@ -123,5 +123,13 @@ def create_app(env_name):
   def supervisor_message():
     return render_template('supervisor_message.html')
 
+  @app.route('/score_log', methods=['GET'])
+  def score_log():
+    return render_template('score_log.html')
+
+  @app.route('/report', methods=['GET'])
+  def report():
+    return render_template('report.html')
+
   
   return app

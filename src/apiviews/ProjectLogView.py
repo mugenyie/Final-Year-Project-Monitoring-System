@@ -41,12 +41,11 @@ def update(log_id):
   return custom_response(log_data, 202)
 
 @log_api.route('/<string:log_id>', methods=['GET'])
-def get(project_id):
+def get(log_id):
   """Get project Log"""
-  log = ProjectLogModel.get_project(project_id)
+  log = ProjectLogModel.get(log_id)
   if not log:
       return custom_response({'error': 'Project Log not found'}, 404)
-  log = ProjectLogModel.get_project(project_id)
   log_data = log_schema.dump(log).data
   return custom_response(log_data, 200)
 
