@@ -9,7 +9,7 @@ function GetUserGroup(){
         document.getElementById('r-group_name').value = data.name;
         document.getElementById('r-group_number').value = data.number;
     })
-    .catch(error => console.error(error));  
+    .catch(error => alert(error));  
 }
 
 async function CreateGroup(){
@@ -31,7 +31,7 @@ function createNewGroup(id,name, number){
         updateMyGroupId(data.id);
         setCookie('group_id', data.id, 30);
     })
-    .catch(error => console.error(error));  
+    .catch(error => alert(error));  
 }
 
 function updateMyGroupId(group_id){
@@ -39,7 +39,7 @@ function updateMyGroupId(group_id){
         group_id:group_id
     })
     .then(data => console.log(JSON.stringify(data)))
-    .catch(error => console.error(error)); 
+    .catch(error => alert(error)); 
 }
 
 let unassigned_list = "";
@@ -65,7 +65,7 @@ function displayUnassigned(){
         document.getElementById('group-list').innerHTML = unassigned_list;
         document.getElementById('group-count').textContent = group_count;
     })
-    .catch(error => console.error(error));  
+    .catch(error => alert(error));  
 }
 
 let assigned_list = "";
@@ -91,7 +91,7 @@ function displayAssigned(){
         document.getElementById('group-list').innerHTML = assigned_list;
         document.getElementById('group-count').textContent = group_count_assigned;
     })
-    .catch(error => console.error(error));  
+    .catch(error => alert(error));  
 }
 
 group_detail = "";
@@ -108,7 +108,7 @@ function editGroup(){
         `;
         document.getElementById('group-detail').innerHTML = group_detail;
     })
-    .catch(error => console.error(error));  
+    .catch(error => alert(error)); 
 }
 
 available = '<option value="">Select Supervisor</option>';
@@ -122,7 +122,7 @@ function availableSupervisors(){
         });
         document.getElementById('available-supervisors').innerHTML = available;
     })
-    .catch(error => console.error(error));  
+    .catch(error => alert(error)); 
 }
 
 function UpdateGroupSupervisor(){
@@ -140,5 +140,5 @@ function UpdateGroupSupervisor(){
     .then(data => {
         console.log(JSON.stringify(data));
     })
-    .catch(error => console.error(error)); 
+    .catch(error => alert(error)); 
 }

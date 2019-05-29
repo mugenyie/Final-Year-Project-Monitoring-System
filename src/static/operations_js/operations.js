@@ -13,6 +13,7 @@ async function PostData(url = '', data = {}) {
         },
         body: JSON.stringify(data),
     });
+    alert("Operation successful");
     return await response.json(); // parses JSON response into native Javascript objects 
 }
 
@@ -24,6 +25,7 @@ async function GetData(url = '') {
             'api-token': auth_token
         },
     });
+    alert("Operation successful");
     return await response.json(); // parses JSON response into native Javascript objects 
 }
 
@@ -37,6 +39,7 @@ async function UpdateData(url = '', data = {}) {
         },
         body: JSON.stringify(data)
     });
+    alert("Update successful");
     return await response.json(); // parses JSON response into native Javascript objects 
 }
 

@@ -3,9 +3,9 @@ function CreateLog(){
 
     let id = create_UUID();
     let title = document.getElementById('r-title').value;
-    let description = document.getElementById('r-title').value;
-    let file_links = document.getElementById('r-title').value;
-    let source_link = document.getElementById('r-title').value;
+    let description = document.getElementById('r-description').value;
+    let file_links = document.getElementById('r-files').value;
+    let source_link = document.getElementById('r-source').value;
 
     PostData(baseurl+'projectlog/',{
         id:id,

@@ -68,35 +68,22 @@
                 </hgroup>
 
                 </header>
-                <div class="content">
-                <section class="widget">
-        <header>
-        <span class="icon">📄</span>
-        <hgroup>
-        <h1>Groups Assigned</h1>
-        <h2>(<span id="group-count"></span>)</h2>
-        </hgroup>
-        
-        </header>
-        <div class="content">
-        <table id="myTable" border="0" width="100">
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th>Number</th>
-        <th>Project Id</th>
-        <th>Supervisor Id</th>
-        <th>Created On</th>
-        </tr>
-        </thead>
-        <tbody id="group-list">
-
-
-        </tbody>
-        </table>
-        </div>
-    </section>
-                </div>
+                <form style="padding: 20px" id="create_log" onsubmit="CreateLog()" enctype="multipart/form-data">
+                    <div class="field-wrap">
+                        Title: <input required id="r-title" type="text">
+                    </div>
+                    <div class="field-wrap">
+                    Decription: <textarea id="r-description" name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="field-wrap">
+                        Link To Files (Optional): <input required id="r-proposal_file" type="text">
+                    </div>
+                    <div class="field-wrap">
+                        Repository Link (Optional): <input required id="r-documentation_file" type="text">
+                    </div>
+                    
+                    <button type="submit" class="">Add Log</button>
+            </form>
             </section>
 </section>
 
