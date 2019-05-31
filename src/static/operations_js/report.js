@@ -12,19 +12,18 @@
 //     })
 //     .catch(error => console.error(error));
 // }
-
+var x_list = [];
 function GenerateNames(group_id){
-    var x;
     GetData(baseurl+'student/group/'+group_id+'/members')
     .then(function(data) {
-        return Getname(data);
+        Getnames(data);
     }) 
     .catch(error => console.error(error)); 
 }
 
-function Getname(data){
+function GenerateReport(student_data,){
     let student_list = new Array();
-    data.forEach(element => {
+    student_data.forEach(element => {
         student_list.push(element.name);
         x = element.name;
     });
