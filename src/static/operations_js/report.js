@@ -14,15 +14,19 @@
 // }
 
 function GenerateNames(group_id){
-    var student_list = new Array();
-
+    var x;
     GetData(baseurl+'student/group/'+group_id+'/members')
     .then(function(data) {
-        data.forEach(element => {
-            student_list.push(element.name);
-        });
+        return Getname(data);
     }) 
     .catch(error => console.error(error)); 
-    console.log(student_list);
-    return ['a','b','c'];
+}
+
+function Getname(data){
+    let student_list = new Array();
+    data.forEach(element => {
+        student_list.push(element.name);
+        x = element.name;
+    });
+    return student_list;
 }
