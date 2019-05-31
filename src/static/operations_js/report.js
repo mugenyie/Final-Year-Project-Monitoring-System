@@ -12,16 +12,27 @@
 //     })
 //     .catch(error => console.error(error));
 // }
-var x_list = [];
-function GenerateNames(group_id){
-    GetData(baseurl+'student/group/'+group_id+'/members')
-    .then(function(data) {
-        Getnames(data);
-    }) 
-    .catch(error => console.error(error)); 
-}
+// var x_list = [];
+// function GenerateNames(group_id){
+//     var resp = GetData();
+//     return resp;
+// }
 
-function GenerateReport(student_data,){
+!async function GenerateNames(group_id){
+    let data = await GetData(baseurl+'student/group/'+group_id+'/members')
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    
+    console.log(data);
+    var names = GetNames(data);
+    console.log(names);
+    }();
+
+function GetNames(student_data){
     let student_list = new Array();
     student_data.forEach(element => {
         student_list.push(element.name);

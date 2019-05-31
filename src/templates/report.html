@@ -55,13 +55,15 @@
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'Week');
 
-
+      GenerateNames(getAllUrlParams().group_id);
       // data.addColumn('number', 'Moses Tom');
       // data.addColumn('number', 'Emmanuel M');
       // data.addColumn('number', 'Tim Cook');
 
-      // var student_data = GenerateNames(getAllUrlParams().group_id);
+      // let student_data = GenerateNames(getAllUrlParams().group_id).then(data => {return data});
       // console.log(student_data);
+      // var names = GetNames(student_data);
+      // console.log(names);
 
       // student_list.forEach(element => {
       //   data.addColumn('number', element);
@@ -92,9 +94,9 @@
     <div id="linechart_material" style="width: 100%; height: 500px"></div>
 
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script> -->
 </body>
 
 </html>
