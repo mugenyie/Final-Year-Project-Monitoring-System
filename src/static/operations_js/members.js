@@ -43,27 +43,15 @@ function AddMember(){
             group_id:group_id,
             created_by:getCookie('id')
         })
+    })
+    .then(data => {
+        if(data.error){
+            alert(data.error);
+        }
+        alert("Successfuly Added Member");
     });   
 }
 
-function AddStudent(){
-    event.preventDefault();
-
-    console.log("Adding new student");
-    AddMember();
-        alert("Successfuly Added Member");
-
-    // createStudent(
-    //     create_UUID(),
-    //     document.getElementById('r-name').value,
-    //     document.getElementById('r-email').value,
-    //     document.getElementById('r-phonenumber').value,
-    //     document.getElementById('r-student_number').value,
-    //     document.getElementById('r-password').value,
-    //     getCookie('course'),
-    //     getCookie('group_id')
-    // );
-}
 
 function GetGroupMembers(){
     GetData(baseurl+'student/group/'+getCookie('group_id')+'/members')

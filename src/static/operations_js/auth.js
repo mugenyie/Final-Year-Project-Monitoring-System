@@ -35,7 +35,7 @@ function registerStudentCookies(data){
     setCookie('phonenumber', data.user.phonenumber, 30);
     setCookie('user_role_name', data.user.user_role_name, 30);
     setCookie('user_role_value', data.user.user_role_value, 30);
-    setCookie('project_id', data.user.project_id, 30);
+    setCookie('project_id', GetProjectByStudent(data.user.created_by), 30);
 
 
     console.log("Cookie data => "+document.cookie);
@@ -77,8 +77,7 @@ function LoginStudent(email, password){
             alert(data.error);
         }
         registerStudentCookies(data);
-        GetProjectByStudent(data.user.created_by);
-        window.location.href = "student"; 
+       window.location.href = "student"; 
     }) 
     .catch(error => alert(error));    
 }
@@ -88,6 +87,7 @@ function GetProjectByStudent(created_by){
     .then(data => {
         console.log(JSON.stringify(data));
         setCookie('project_id', data.id);
+        return data.id;
     })
     .catch(error => console.error(error));
 }

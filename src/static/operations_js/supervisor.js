@@ -60,6 +60,7 @@ function GetGroupProject(group_id){
         document.getElementById('r-proposal_file').value = data.proposal_file;
         document.getElementById('r-documentation_file').value = data.documentation_file;
         document.getElementById('r-description').value = data.description;
+        document.getElementById('r-score').value = data.score;
     })
     .catch(error => console.error(error));
 }
@@ -70,14 +71,19 @@ function ScoreProject(){
     var score = document.getElementById('r-score').value;
 
     UpdateData(baseurl+`project/${project_id}`, {score:score})
-    .then(data => {console.log(data)})
+    .then(data => {
+        if(data.error){
+            alert(data.error);
+        }
+        alert("Succesfuly Added Score");
+    })
     .catch(error => console.error(error));  
 }
-{/* <th>Title</th>
-                <th>Description</th>
-                <th>StudentId</th>
-                <th>Score</th>
-                <th>Created On</th> */}
+/* <th>Title</th>
+<th>Description</th>
+<th>StudentId</th>
+<th>Score</th>
+<th>Created On</th> */
 var group_log = "";
 function GetGroupLog(group_id){
     GetData(baseurl+`projectlog/${group_id}/group`)
@@ -87,10 +93,11 @@ function GetGroupLog(group_id){
             group_count_assigned+=1;
             group_log += `
             <tr onclick="window.location.href='score_log?log_id=${element.id}'">
-            <td>${element.name}</td>
-            <td>${element.number}</td>
+            <td>${element.title}</td>
+            <td>${element.description}</td>
             <td>${element.project_id}</td>
-            <td>${element.supervisor_id}</td>
+            <td>${element.supervisor_remarks}</td>
+            <td>${element.score}</td>
             <td>${element.created_on}</td>
             </tr>
             `;
@@ -104,11 +111,30 @@ function GetLogInfo(log_id){
     GetData(baseurl+`projectlog/${log_id}`)
     .then(data => {
         console.log(JSON.stringify(data));
-        document.getElementById('r-title').value = data.name;
-        document.getElementById('r-description').value = data.id;
-        document.getElementById('r-files').value = data.git_url;
-        document.getElementById('r-source').value = data.web_url;
-        document.getElementById('r-score').value = data.proposal_file;
+        document.getElementById('r-title').value = data.title;
+        document.getElementById('r-description').value = data.description;
+        document.getElementById('r-files').value = data.files;
+        document.getElementById('r-source').value = data.source_link;
+        document.getElementById('r-score').value = data.score;
+        document.getElementById('r-supervisor_remarks').value = data.supervisor_remarks;
     })
     .catch(error => console.error(error));
 }
+
+function ScoreLog(log_id){
+    event.preventDefault();
+
+    let score = document.getElementById('r-score').value;
+    let remark = document.getElementById('r-supervisor_remarks').value;
+
+    UpdateData(baseurl+`projectlog/${log_id}`,{score:score,supervisor_remarks:remark})
+    .then(data => {
+        if(data.error){
+            alert(data.error);
+        }else{
+            alert("Successfuly awarded Project Log")
+        }
+        console.log(data);
+    })
+}
+

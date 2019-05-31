@@ -26,14 +26,7 @@
 </div>
 <div class="buttons">
 <button class="ico-font">&#59157;</button>
-<span class="button dropdown">
-<a href="#">Notifications <span class="pip">4</span></a>
-</span>
-<span class="button dropdown">
-<a href="#">Inbox <span class="pip">6</span></a>
-</span>
-<span class="button">Live</span>
-<span class="button">Help</span>
+
 <span class="button blue"><a href="javascript:logOut()">Logout</a></span>
 </div>
 </section>
@@ -51,7 +44,7 @@
 
 <section class="content">
 
-            <form onsubmit="ScoreLog()">
+            <form onsubmit="ScoreLog(getAllUrlParams().log_id)">
                 <div class="field-wrap">
                     Title: <input readonly id="r-title" type="text">
                 </div>
@@ -65,16 +58,19 @@
                     Repository Link: <input readonly id="r-source" type="text">
                 </div>
                 <div class="field-wrap">
+                Supervisor Remarks: <textarea required id="r-supervisor_remarks" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="field-wrap">
                    Score Project Log (%): <input required id="r-score" type="number">
                 </div>
                 <input id="project_id" type="hidden">
-                <button type="submit" class="">Create / Update Project</button>
+                <button type="submit" class="">Award Student Log</button>
         </form>
 
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/custom.js') }}"></script> -->
 <!-- <script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script> -->
 </body>
 

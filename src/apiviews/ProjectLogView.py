@@ -33,7 +33,7 @@ def update(log_id):
   if error:
       return custom_response(error, 400)
 
-  log = ProjectLogModel.get_project(log_id)
+  log = ProjectLogModel.get(log_id)
   if not log:
       return custom_response({'error': 'Project not found'}, 404)
   log.update(data)

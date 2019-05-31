@@ -141,6 +141,10 @@ function UpdateGroupSupervisor(){
         body: JSON.stringify({supervisor_id:supervisor_id})
     })
     .then(data => {
+        if(data.error){
+            alert(data.error);
+        }
+        alert('Supervisor succesfuly Assigned');
         console.log(JSON.stringify(data));
     })
     .catch(error => alert(error)); 

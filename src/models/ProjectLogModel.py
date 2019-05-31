@@ -23,6 +23,7 @@ class ProjectLogModel(BaseModel):
     # class constructor
     def __init__(self, data):
         BaseModel.__init__(self, data)
+        self.id = data.get('id')
         self.title = data.get('title')
         self.description = data.get('description')
         self.files = data.get('files')
@@ -54,7 +55,7 @@ class ProjectLogModel(BaseModel):
 
     @staticmethod
     def get(log_id):
-        return ProjectLogModel.query.filter_by(id=log_id).order_by(ProjectLogModel.created_on.desc())
+        return ProjectLogModel.query.get(log_id)
     
     @staticmethod
     def get_by_groupid(group_id):

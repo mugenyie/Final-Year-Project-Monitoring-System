@@ -1,7 +1,7 @@
 let created_by = getCookie('id');
 let auth_token = getCookie('auth_token') == null?"":getCookie('auth_token');
-let baseurl = "https://csc-fypms.herokuapp.com/api/v1/";
-//let baseurl = "http://127.0.0.1:5000/api/v1/";
+//let baseurl = "https://csc-fypms.herokuapp.com/api/v1/";
+let baseurl = "http://127.0.0.1:5000/api/v1/";
 
 async function PostData(url = '', data = {}) {
     // Default options are marked with *
