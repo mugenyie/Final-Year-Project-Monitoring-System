@@ -9,7 +9,8 @@
 <meta name="robots" content="" />
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+<script src="https://www.chartjs.org/samples/latest/utils.js"></script> 
 <script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
 <script src="{{ url_for('static', filename='operations_js/supervisor.js') }}"></script>
 <script src="{{ url_for('static', filename='operations_js/report.js') }}"></script>
@@ -47,51 +48,23 @@
 <section class="content">
 
     <script>
-      google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
+      const group_id = getAllUrlParams().group_id;
 
-    function drawChart() {
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Week');
-
-      GenerateNames(getAllUrlParams().group_id);
-      // data.addColumn('number', 'Moses Tom');
-      // data.addColumn('number', 'Emmanuel M');
-      // data.addColumn('number', 'Tim Cook');
-
-      // let student_data = GenerateNames(getAllUrlParams().group_id).then(data => {return data});
-      // console.log(student_data);
-      // var names = GetNames(student_data);
-      // console.log(names);
-
-      // student_list.forEach(element => {
-      //   data.addColumn('number', element);
-      // });
-
-      data.addRows([
-        [1,  37.8, 100, 41.8],
-        [2,  30.9, 69.5, 32.4],
-        [3,  25.4,   57, 25.7],
-        [4,  11.7, 18.8, 10.5]
-      ]);
-
-      var options = {
-        chart: {
-          title: 'Student Group Project Performance',
-          subtitle: 'Student Performance is per weekly submittion of Project Log scored (%)'
-        },
-        width: 1000,
-        height: 500
+      window.onload = function() {
+        GenerateNames(group_id).then(data => {
+          var config = JSON.parse(data);
+          console.log(config);
+          var ctx = document.getElementById('canvas').getContext('2d');
+          window.myLine = new Chart(ctx, config);
+          
+        });
+        
       };
-
-      var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
     </script>
 
-    <div id="linechart_material" style="width: 100%; height: 500px"></div>
+<div style="width:75%;">
+		<canvas id="canvas"></canvas>
+	</div>
 
 </section>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
