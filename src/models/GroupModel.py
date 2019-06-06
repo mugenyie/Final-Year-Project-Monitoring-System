@@ -64,12 +64,7 @@ class GroupModel(BaseModel):
     
     @staticmethod
     def get_groups_unassigned():
-        return GroupModel.query.filter(GroupModel.supervisor_id == None
-        ).join(SupervisorModel, GroupModel.supervisor_id == SupervisorModel.id
-        ).join(ProjectModel, GroupModel.project_id == ProjectModel.id
-        ).values(GroupModel.id, GroupModel.name, GroupModel.number,
-    GroupModel.created_on, GroupModel.modified_on ,GroupModel.created_by,
-    GroupModel.project_id, GroupModel.supervisor_id, SupervisorModel.name.label('supervisor_name'), ProjectModel.name.label('project_name'))
+        return GroupModel.query.filter(GroupModel.supervisor_id == None).all()
         
     @staticmethod
     def get_by_id(group_id):
