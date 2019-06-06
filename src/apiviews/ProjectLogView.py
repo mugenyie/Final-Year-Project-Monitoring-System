@@ -1,13 +1,14 @@
 #/src/views/ProjectView
 
 from flask import request, json, Response, Blueprint, g
-from ..models.ProjectLogModel import ProjectLogModel, ProjectLogSchema
+from ..models.ProjectLogModel import ProjectLogModel, ProjectLogSchema, ProjectLogGraphSchema
 from ..services.AuthorizationService import Auth
 from ..apiviews import custom_response
 
 log_api = Blueprint('log_api', __name__)
 log_schema = ProjectLogSchema()
 logs_schema = ProjectLogSchema(many=True)
+graph_schema = ProjectLogGraphSchema(many=True)
 
 @log_api.route('/', methods=['POST'])
 def create():
@@ -76,3 +77,12 @@ def get_by_groupid(group_id):
   log = ProjectLogModel.get_by_groupid(group_id)
   log_data = logs_schema.dump(log).data
   return custom_response(log_data, 200)
+
+@log_api.route('/<string:group_id>/performance', methods=['GET'])
+def get_group_performance(group_id):
+  data = ProjectLogModel.group_performance(group_id)
+  log_data = graph_schema.dump(data).data
+  return custom_response(
+    log_data,
+    200
+  )

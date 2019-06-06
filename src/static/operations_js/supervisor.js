@@ -36,8 +36,8 @@ function displayAssignedGroups(){
             <tr onclick="window.location.href='view_group?group_id=${element.id}'">
             <td>${element.name}</td>
             <td>${element.number}</td>
-            <td>${element.project_id}</td>
-            <td>${element.supervisor_id}</td>
+            <td>${element.project_name}</td>
+            <td>${element.supervisor_name}</td>
             <td>${element.created_on}</td>
             </tr>
             `;

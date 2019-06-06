@@ -47,10 +47,16 @@
 <br />
         <form id="supervisor_mesage" onsubmit="SendMessage()" enctype="multipart/form-data">
             <div class="field-wrap">
-                Title: <input required id="r-title" type="text">
+                Subject: <input required id="r-title" type="text">
             </div>
+            <!-- <div class="field-wrap">
+                <select name="" id="">
+                    <option value="">Select Group</option>
+                    <option value="">Select Group</option>
+                </select>
+            </div> -->
             <div class="field-wrap">
-            message: <textarea id="r-message" name="" id="" cols="30" rows="10"></textarea>
+            Message: <textarea id="r-message" name="" id="" cols="30" rows="10"></textarea>
             </div>
             
             <button type="submit" class="">Send Message</button>
@@ -59,7 +65,6 @@
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.tablesorter.min.js') }}"></script>
 </body>
 
 </html>

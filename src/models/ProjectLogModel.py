@@ -1,7 +1,9 @@
 # src/models/ProjectLogModel.py
 import datetime, uuid
 from marshmallow import fields, Schema
+from sqlalchemy.sql import func
 from . import db, BaseModel
+from .StudentModel import StudentModel
 
 
 class ProjectLogModel(BaseModel):
@@ -17,6 +19,7 @@ class ProjectLogModel(BaseModel):
     source_link = db.Column(db.String(128), nullable=True)
     student_id = db.Column(db.String, db.ForeignKey('students.id'), nullable=False)
     project_id = db.Column(db.String(128), nullable=True)
+    week = db.Column(db.String(20), nullable=True)
     group_id = db.Column(db.String, db.ForeignKey('groups.id'), nullable=True)
     supervisor_id = db.Column(db.String, db.ForeignKey('supervisors.id'), nullable=True)
 
@@ -33,6 +36,7 @@ class ProjectLogModel(BaseModel):
         self.project_id = data.get('project_id')
         self.student_id = data.get('student_id')
         self.group_id = data.get('group_id')
+        self.week = data.get('week')
         self.supervisor_id = data.get('supervisor_id')
 
     def __str__(self):
@@ -61,9 +65,22 @@ class ProjectLogModel(BaseModel):
     def get_by_groupid(group_id):
         return ProjectLogModel.query.filter_by(group_id=group_id).order_by(ProjectLogModel.created_on.desc())
 
+    @staticmethod 
+    def group_performance(group_id):
+        # return ProjectLogModel.query.join(StudentModel, ProjectLogModel.student_id == StudentModel.id).add_columns(StudentModel.name).all()
+        return db.session.query(ProjectLogModel
+        ).join(StudentModel
+        ).group_by(ProjectLogModel.student_id, StudentModel.name, ProjectLogModel.week
+        ).values(StudentModel.name,ProjectLogModel.week, db.func.sum(ProjectLogModel.score).label('average'))
+
+class ProjectLogGraphSchema(Schema):
+    name = fields.Str()
+    week = fields.Str()
+    average = fields.Str()
 
 class ProjectLogSchema(Schema):
     id = fields.Str(required=True)
+    name = fields.Str(required=False)
     title = fields.Str(required=True)
     description = fields.Str(required=True)
     files = fields.Str(required=False)
@@ -73,6 +90,7 @@ class ProjectLogSchema(Schema):
     student_id = fields.Str(required=False)
     project_id = fields.Str(required=False)
     group_id = fields.Str(required=False)
+    week = fields.Str(required=False)
     supervisor_id = fields.Str(required=False)
     created_on = fields.DateTime(dump_only=True)
     modified_on = fields.DateTime(dump_only=True)

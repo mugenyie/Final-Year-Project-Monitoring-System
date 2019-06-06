@@ -57,8 +57,8 @@ function displayUnassigned(){
             <tr>
             <td>${element.name}</td>
             <td>${element.number}</td>
-            <td>${element.project_id}</td>
-            <td>${element.supervisor_id}</td>
+            <td>${element.project_name}</td>
+            <td>${element.supervisor_name}</td>
             <td>${element.created_on}</td>
             <td><a href="edit_group?id=${element.id}">edit</a></td>
             </tr>
@@ -83,8 +83,8 @@ function displayAssigned(){
             <tr>
             <td>${element.name}</td>
             <td>${element.number}</td>
-            <td>${element.project_id}</td>
-            <td>${element.supervisor_id}</td>
+            <td>${element.project_name}</td>
+            <td>${element.supervisor_name}</td>
             <td>${element.created_on}</td>
             <td><a href="edit_group?id=${element.id}">edit</a></td>
             </tr>
