@@ -71,6 +71,9 @@
                 </header>
                 <form style="padding: 20px" id="create_log" onsubmit="CreateLog()" enctype="multipart/form-data">
                     <div class="field-wrap">
+                        Select Week: <select id="week_select"></select>
+                    </div>
+                    <div class="field-wrap">
                         Title: <input required id="r-title" type="text">
                     </div>
                     <div class="field-wrap">
@@ -87,6 +90,8 @@
             </form>
             </section>
 </section>
-
+<script>
+displayWeekSelect();
+</script>
 </body>
 </html>

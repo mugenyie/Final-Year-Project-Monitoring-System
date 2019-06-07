@@ -6,6 +6,7 @@ function CreateLog(){
     let description = document.getElementById('r-description').value;
     let file_links = document.getElementById('r-files').value;
     let source_link = document.getElementById('r-source').value;
+    let week = document.getElementById('week_select').value;
 
     PostData(baseurl+'projectlog/',{
         id:id,
@@ -15,7 +16,8 @@ function CreateLog(){
         source_link:source_link,
         student_id:getCookie('id'),
         project_id:getCookie('project_id'),
-        group_id:getCookie('group_id')
+        group_id:getCookie('group_id'),
+        week:week
     })
     .then(data => {
         console.log(data);
@@ -45,4 +47,13 @@ function displayStudentLogs(){
         document.getElementById('log_list').innerHTML = log_list;
     })
     .catch(error => console.error(error));  
+}
+
+function displayWeekSelect(){
+    var select_items="";
+    for(var x = 1; x <= 20; x++){
+        select_items+=`<option value="week_${x}">Week ${x}</option>`;
+    }
+    console.log(select_items);
+    document.getElementById('week_select').innerHTML = select_items;
 }
