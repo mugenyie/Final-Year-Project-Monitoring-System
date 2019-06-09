@@ -1,3 +1,15 @@
+function getStudentSupervisor(){
+    GetData(baseurl+'group/'+getCookie('group_id'))
+    .then(data => {
+        console.log(data);
+        setCookie('supervisor_id', data.supervisor_id, 30);
+        setCookie('group_name', data.name, 30);
+    })
+    .catch(error => alert(error));  
+}
+
+getStudentSupervisor();
+
 function getStudentDetails(){
     var user_data = document.cookie;
     console.log(user_data);
@@ -8,8 +20,8 @@ function getStudentDetails(){
             <p>Course: ${getCookie('course')}</p>
             <p>Phone: ${getCookie('phonenumber')}</p>
             <p>Student Number: ${getCookie('student_number')}</p>
-            <p>Group ID: ${getCookie('group_id')}</p>
-            <p>Project ID: ${getCookie('project_id')}</p>
+            <p>Group Name: ${getCookie('group_name')}</p>
+            <p>Project Name: ${getCookie('project_name')}</p>
         `;
 
     var div = document.getElementById('userDetails');

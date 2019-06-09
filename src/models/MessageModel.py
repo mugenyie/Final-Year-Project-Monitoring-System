@@ -17,6 +17,7 @@ class MessageModel(BaseModel):
     # class constructor
     def __init__(self, data):
         BaseModel.__init__(self, data)
+        self.id = data.get('id')
         self.subject = data.get('subject')
         self.message = data.get('message')
         self.from_id = data.get('from_id')
@@ -32,18 +33,18 @@ class MessageModel(BaseModel):
     #CRUD Operations
     @staticmethod
     def get_message_from(id):
-        return MessageModel.query.filter_by(from_id=id).order_by(MessageModel.created_at.desc())
+        return MessageModel.query.filter_by(from_id=id).order_by(MessageModel.created_on.desc())
 
     @staticmethod
     def get_message_to(id):
-        return MessageModel.query.filter_by(to_id=id).order_by(MessageModel.created_at.desc())
+        return MessageModel.query.filter_by(to_id=id).order_by(MessageModel.created_on.desc())
 
 class MessageSchema(Schema):
     id = fields.Str(missing=str(uuid.uuid4))
     subject = fields.Str(required=True)
     message = fields.Str(required=True)
-    from_id = fields.Int(required=True)
-    to_id = fields.Int(required=True)
+    from_id = fields.Str(required=True)
+    to_id = fields.Str(required=True)
     created_on = fields.DateTime(dump_only=True)
 
 

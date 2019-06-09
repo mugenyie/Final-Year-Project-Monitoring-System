@@ -16,7 +16,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();displayAssignedGroups();GetMessagesTo(getCookie('id'));"">
+<body onload="checkToken();displayAssignedGroups();GetMessagesToSupervisor(getCookie('id'));"">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -44,34 +44,20 @@
 <!-- navigation -->
 
 <section class="content">
-
-    <section class="widget">
-        <header>
-        <span class="icon">📄</span>
-        <hgroup>
-        <h1>Groups Assigned</h1>
-        <h2>(<span id="group-count"></span>)</h2>
-        </hgroup>
-        
-        </header>
-        <div class="content">
         <table id="myTable" border="0" width="100">
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th>Number</th>
-        <th>Project</th>
-        <th>Supervisor</th>
-        <th>Created On</th>
-        </tr>
-        </thead>
-        <tbody id="group-list">
-
-
-        </tbody>
-        </table>
-        </div>
-    </section>
+                <thead>
+                <tr>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Time Sent</th>
+                </tr>
+                </thead>
+                <tbody id="message_list">
+        
+        
+                </tbody>
+                </table>
+    
 
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>

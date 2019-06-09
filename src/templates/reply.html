@@ -16,7 +16,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();getStudentDetails(); GetMessagesTo(getCookie('group_id'));">
+<body onload="checkToken();GetMessagesTo(getCookie('group_id'));">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Student</h1>
@@ -65,9 +65,24 @@
 <!-- navigation -->
 
 <section class="content">
-    <h1 class="Pageheader">Student Details</h1>
-    <div id="userDetails"></div>
-</section>
+        <form onsubmit="SendMessage()">
+                <div class="field-wrap">
+                    Subject: <input required id="subject" type="text">
+                </div>
+                <div class="field-wrap">
+                Message: <textarea id="message" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <input type="hidden" id="from_id" value="">
+                <input type="hidden" id="to_id" value="">
+                <button type="submit">Send Message</button>
+        </form>
+    
+    </section>
+    <script>
+        var to_id = getAllUrlParams().to_id;
+        document.getElementById('from_id').value = getCookie('id');
+        document.getElementById('to_id').value = to_id;
+    </script>
 
 </body>
 </html>

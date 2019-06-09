@@ -11,11 +11,12 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
 <script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
 <script src="{{ url_for('static', filename='operations_js/supervisor.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/message.js') }}"></script>
 <!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();">
+<body onload="checkToken();GetMessagesTo(getCookie('id'));">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -36,7 +37,7 @@
 <ul>
 <li class="section"><a href="supervisor"><span class="icon">&#59176;</span> Dashboard</a></li>
 <li>
-<a href="#"><span class="icon">&#128196;</span>Announcements</a>
+<a href="all_group_messages"><span class="icon">&#127748;</span>Messages <span id="message_count" class="pip"></span></a>
 </li>
 </ul>
 </nav>

@@ -10,6 +10,7 @@ from .apiviews.GroupView import group_api, groups_api
 from .apiviews.ProjectView import project_api
 from .apiviews.StatView import stat_api
 from .apiviews.ProjectLogView import log_api
+from .apiviews.MessageView import message_api
 
 def create_app(env_name):
   """
@@ -34,6 +35,7 @@ def create_app(env_name):
   app.register_blueprint(project_api, url_prefix='{}project'.format(api_version))
   app.register_blueprint(log_api, url_prefix='{}projectlog'.format(api_version))
   app.register_blueprint(stat_api, url_prefix='{}statistics'.format(api_version))
+  app.register_blueprint(message_api, url_prefix='{}message'.format(api_version))
 
   @app.route('/', methods=['GET'])
   def index():
@@ -130,6 +132,18 @@ def create_app(env_name):
   @app.route('/report', methods=['GET'])
   def report():
     return render_template('report.html')
+
+  @app.route('/group_messages', methods=['GET'])
+  def group_messages():
+    return render_template('group_messages.html')
+
+  @app.route('/reply', methods=['GET'])
+  def reply():
+    return render_template('reply.html')
+
+  @app.route('/all_group_messages', methods=['GET'])
+  def all_group_messages():
+    return render_template('all_group_messages.html')
 
   
   return app

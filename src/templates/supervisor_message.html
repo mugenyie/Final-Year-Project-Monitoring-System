@@ -10,12 +10,12 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all" />
 <script src="{{ url_for('static', filename='operations_js/operations.js') }}"></script>
-<script src="{{ url_for('static', filename='operations_js/supervisor.js') }}"></script>
+<script src="{{ url_for('static', filename='operations_js/message.js') }}"></script>
 <!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();displayAssignedGroups();">
+<body onload="checkToken();">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Supervisor</h1>
@@ -36,7 +36,7 @@
 <ul>
 <li class="section"><a href="supervisor"><span class="icon">&#59176;</span> Dashboard</a></li>
 <li>
-<a href="#"><span class="icon">&#128196;</span>Announcements</a>
+<a href="#"><span class="icon">&#128196;</span>Messages</a>
 </li>
 </ul>
 </nav>
@@ -45,26 +45,26 @@
 <section class="content">
 <h1 style="font-size:26px">Send Message to Group</h1>
 <br />
-        <form id="supervisor_mesage" onsubmit="SendMessage()" enctype="multipart/form-data">
+        <form onsubmit="SendMessage()">
             <div class="field-wrap">
-                Subject: <input required id="r-title" type="text">
+                Subject: <input required id="subject" type="text">
             </div>
-            <!-- <div class="field-wrap">
-                <select name="" id="">
-                    <option value="">Select Group</option>
-                    <option value="">Select Group</option>
-                </select>
-            </div> -->
             <div class="field-wrap">
-            Message: <textarea id="r-message" name="" id="" cols="30" rows="10"></textarea>
+            Message: <textarea id="message" name="" id="" cols="30" rows="10"></textarea>
             </div>
-            
-            <button type="submit" class="">Send Message</button>
+            <input type="hidden" id="from_id" value="">
+            <input type="hidden" id="to_id" value="">
+            <button type="submit">Send Message</button>
     </form>
 
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<script>
+    var group_id = getAllUrlParams().group_id;
+    document.getElementById('from_id').value = getCookie('id');
+    document.getElementById('to_id').value = group_id;
+</script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script> -->
 </body>
 
 </html>

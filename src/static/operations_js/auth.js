@@ -35,7 +35,7 @@ function registerStudentCookies(data){
     setCookie('phonenumber', data.user.phonenumber, 30);
     setCookie('user_role_name', data.user.user_role_name, 30);
     setCookie('user_role_value', data.user.user_role_value, 30);
-    setCookie('project_id', GetProjectByStudent(data.user.created_by), 30);
+    GetProjectByStudent(data.user.created_by);
 
 
     console.log("Cookie data => "+document.cookie);
@@ -87,6 +87,17 @@ function GetProjectByStudent(created_by){
     .then(data => {
         console.log(JSON.stringify(data));
         setCookie('project_id', data.id);
+        setCookie('project_name', data.name);
+    })
+    .catch(error => console.error(error));
+}
+
+function GetGroupByStudent(created_by){
+    GetData(baseurl+`project/${created_by}/createdby`)
+    .then(data => {
+        console.log(JSON.stringify(data));
+        setCookie('project_id', data.id);
+        setCookie('project_name', data.name);
         return data.id;
     })
     .catch(error => console.error(error));

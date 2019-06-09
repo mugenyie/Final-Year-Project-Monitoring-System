@@ -16,7 +16,7 @@
 <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css" media="all" /><![endif]-->
 <!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
-<body onload="checkToken();getStudentDetails(); GetMessagesTo(getCookie('group_id'));">
+<body onload="checkToken();GetMessagesTo(getCookie('group_id'));">
 <div class="testing">
 <header class="main">
 <h1><strong>Student </strong> Project Monitoring System | Student</h1>
@@ -65,8 +65,21 @@
 <!-- navigation -->
 
 <section class="content">
-    <h1 class="Pageheader">Student Details</h1>
-    <div id="userDetails"></div>
+    <button onclick="window.location.href='reply?to_id='+getCookie('supervisor_id')">Send Supervisor Message</button>
+    <hr>
+        <table id="myTable" border="0" width="100">
+                <thead>
+                <tr>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Time Sent</th>
+                </tr>
+                </thead>
+                <tbody id="message_list">
+        
+        
+                </tbody>
+                </table>
 </section>
 
 </body>

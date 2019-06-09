@@ -5,11 +5,11 @@ from ..models.MessageModel import MessageModel, MessageSchema
 from ..services.AuthorizationService import Auth
 from ..apiviews import custom_response
 
-log_api = Blueprint('log_api', __name__)
+message_api = Blueprint('message_api', __name__)
 message_schema = MessageSchema()
 messages_schema = MessageSchema(many=True)
 
-@log_api.route('/', methods=['POST'])
+@message_api.route('/', methods=['POST'])
 def create():
   """
   Create new message
@@ -20,17 +20,15 @@ def create():
   if error:
     return custom_response(error, 400)
   
-  log = MessageModel(data)
-  log.save()
-  log_data = message_schema.dump(log).data
-  return custom_response(log_data, 201)
+  message = MessageModel(data)
+  message.save()
+  message_data = message_schema.dump(message).data
+  return custom_response(message_data, 201)
 
 
-@log_api.route('/<string:log_id>', methods=['GET'])
-def get(log_id):
+@message_api.route('to/<string:to_id>', methods=['GET'])
+def get(to_id):
   """Get project Log"""
-  log = MessageSchema.get(log_id)
-  if not log:
-      return custom_response({'error': 'Project Log not found'}, 404)
-  log_data = message_schema.dump(log).data
+  messages = MessageModel.get_message_to(to_id)
+  log_data = messages_schema.dump(messages).data
   return custom_response(log_data, 200)
